@@ -4,7 +4,7 @@
 #include <iterator>
 #include<time.h>
 #include<vector>
-#define N 10000
+#define N 100000
  
 using namespace std;
  
