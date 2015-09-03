@@ -373,60 +373,60 @@ int main()
     t = clock();
     bubble_sort(begin(arreglo), end(arreglo)); 
     t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate BUBBLE SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con BUBBLE SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
  
     t = clock();//es para poder medir el tiempo de medicion
     cocktail_sort(begin(arreglo), end(arreglo));
      t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate COCKTAIL SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con COCKTAIL SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
  
     t = clock();//es para poder medir el tiempo de medicion
     insertion_sort(begin(arreglo), end(arreglo));
     t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate INSERTION SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con INSERTION SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
  
    /* t = clock();//es para poder medir el tiempo de medicion
     counting_sort(begin(arreglo), end(arreglo));
     t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate COUNTING SORT \n", t, ((float)t) / CLOCKS_PER_SEC); */
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con COUNTING SORT \n", t, ((float)t) / CLOCKS_PER_SEC); */
 
     t = clock();//es para poder medir el tiempo de medicion
     mergesort(begin(arreglo), end(arreglo));
     t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate MERGE SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con MERGE SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
   
     t = clock();//es para poder medir el tiempo de medicion
     lsd_radix_sort(arreglo, arreglo + N);
     t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate RADIX \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con RADIX \n", t, ((float)t) / CLOCKS_PER_SEC);
  
     t = clock();//es para poder medir el tiempo de medicion
     shell s; 
     s.sort(arreglo, N);
     t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate SHELL SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con SHELL SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
  
     t = clock();//es para poder medir el tiempo de medicion
    selection_sort(begin(arreglo), end(arreglo));
      t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate SELECTION SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con SELECTION SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
  
     t = clock();//es para poder medir el tiempo de medicion
     heap_sort(begin(arreglo), end(arreglo));
     t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate HEAP SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con HEAP SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
  
    t = clock();//es para poder medir el tiempo de medicion
    quickSort(arreglo, 0, N - 1);
     t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate QUICK SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con QUICK SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
  
      t = clock();//es para poder medir el tiempo de medicion
      tree_sort(begin(arreglo), end(arreglo));
      t = clock() - t;
-    printf("It took me %d clicks (%f seconds). To calculate TREE SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
+    printf("Tuve que dar %d clicks (%f seconds). Para ordenar con TREE SORT \n", t, ((float)t) / CLOCKS_PER_SEC);
     
-	printf("With an array of size %d \n", N);
+	printf("Con el tamaño de arreglo:  %d \n", N);
        return 0;
 }}
 
