@@ -3,19 +3,21 @@
 
 using namespace std;
 
-//class AVL;
+template<class DATO> class AVL;
 
+template<class DATO>
 class Nodo 
 {
   public:
-   Nodo(const int dat, Nodo *pad=nullptr, Nodo *izq=nullptr, Nodo *der=nullptr) : dato(dat), padre(pad), izquierdo(izq), derecho(der), FE(0) {}
-
-   int dato;
+   Nodo(const DATO dat, Nodo<DATO> *pad=nullptr, Nodo<DATO> *izq=nullptr, Nodo<DATO> *der=nullptr) : dato(dat), padre(pad), izquierdo(izq), derecho(der), FE(0) {}
+   
+   DATO dato;
+   
    int FE;
    
-   Nodo *izquierdo;
-   Nodo *derecho;
-   Nodo *padre;
+   Nodo<DATO> *izquierdo;
+   Nodo<DATO> *derecho;
+   Nodo<DATO> *padre;
    
-   friend class AVL;
+   friend class AVL<DATO>;
 };
