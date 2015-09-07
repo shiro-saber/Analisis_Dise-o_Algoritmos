@@ -21,9 +21,25 @@ int main()
     //arreglo para agregar al arbol
     srand((int)time(NULL));
     int arreglo[N];
+    
     for (int i = 0; i < N; i++)
     {
-        arreglo[i] = rand() % 10000;
+        int r;
+       bool encontrado = true;
+	while(encontrado)
+       {
+             encontrado = false;
+            r = rand() % 1000000;
+            for (int x = 0; x < N; x++)
+   	   {
+                  if ( r == arreglo[x])
+		  {
+                         encontrado = true;
+                        break;
+                 }
+           } 
+       }	
+        arreglo[i] = r;
     } 
     
     clock_t t;
@@ -38,16 +54,7 @@ int main()
         ArbolInt.InOrden(Mostrar);
    }
    
-   cout << "Altura de arbol " << ArbolInt.AlturaArbol() << endl;
-
-   // Ver el arbol en los diferentes ordenes
-   cout << "InOrden: ";
-   ArbolInt.InOrden(Mostrar);
-   cout << endl;
-
-   cout << "Altura de arbol " << ArbolInt.AlturaArbol() << endl;
-   
-   // Veamos algunos parámetros
+   cout  << endl << "Altura de arbol " << ArbolInt.AlturaArbol() << endl;
    cout << "N nodos: " << ArbolInt.NumeroNodos() << endl;
    cout << "Altura de 1 " << ArbolInt.Altura(1) << endl;
    cout << "Altura de 10 " << ArbolInt.Altura(10) << endl;
