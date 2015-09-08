@@ -68,7 +68,7 @@ void AVL<DATO>::Insertar(const DATO dat)
 {
    Nodo<DATO> *padre = nullptr;
 
-   cout << endl << endl << "Insertar: " << dat << endl;
+   cout << endl  << "Insertar: " << dat << endl;
    actual = raiz;
    
    while(!Vacio(actual) && dat != actual->dato) 

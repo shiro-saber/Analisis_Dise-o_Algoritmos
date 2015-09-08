@@ -5,6 +5,7 @@
 #include <time.h>
 #include<vector>
 #include "AVL.h"
+#include "Arbol23.h"
 
 #define N 100000
 
@@ -18,6 +19,8 @@ void Mostrar(DATO &d, int FE)
 
 int main()
 {
+    clock_t t;
+    
     //arreglo para agregar al arbol
     srand((int)time(NULL));
     int arreglo[N];
@@ -41,24 +44,28 @@ int main()
        }	
         arreglo[i] = r;
     } 
-    
-    clock_t t;
     t = clock();
-   // Un árbol de enteros
+   
    AVL<int> ArbolInt;
+   Arbol23<int> ArbolInt2;
+   
+   Arbol23<int>::Node *inserted_node = nullptr;
 
    //Agregar el arbol
    for (int j = 0; j < N; j++)
    {
         ArbolInt.Insertar(arreglo[j]);
-        ArbolInt.InOrden(Mostrar);
+        inserted_node = ArbolInt2.insert(j);
    }
    
-   cout  << endl << "Altura de arbol " << ArbolInt.AlturaArbol() << endl;
+   ArbolInt2.Traverse([](int x) { cout << x << ' ';});
+   ArbolInt.InOrden(Mostrar);   
+
+   /*cout  << endl << "Altura de arbol " << ArbolInt.AlturaArbol() << endl;
    cout << "N nodos: " << ArbolInt.NumeroNodos() << endl;
    cout << "Altura de 1 " << ArbolInt.Altura(1) << endl;
    cout << "Altura de 10 " << ArbolInt.Altura(10) << endl;
-   cout << "Altura de arbol " << ArbolInt.AlturaArbol() << endl;
+   cout << "Altura de arbol " << ArbolInt.AlturaArbol() << endl;*/
 
    t = clock() - t;
    
