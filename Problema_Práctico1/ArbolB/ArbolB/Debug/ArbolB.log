@@ -1,32 +1,37 @@
-﻿Build started 09/09/2015 11:54:42 p. m..
+﻿Build started 10/09/2015 02:13:59 p. m..
      1>Project "C:\Users\shiro_saber\Documents\Analisis_Dise-o_Algoritmos\Problema_Práctico1\ArbolB\ArbolB\ArbolB.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(132): warning C4346: 'BTree<T>::crudRecord': dependent name is not a type
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(132): note: prefix with 'typename' to indicate a type
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(132): error C2988: unrecognizable template declaration/definition
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(132): error C2059: syntax error: '('
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(132): error C2091: function returns function
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(132): error C2039: 'crudRecord': is not a member of 'BTree<T>'
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(132): error C2059: syntax error: ')'
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(148): error C2899: typename cannot be used outside a template declaration
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(150): error C2143: syntax error: missing ';' before '{'
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(150): error C2447: '{': missing function header (old-style formal list?)
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(224): error C2244: 'BTree<T>::split': unable to match function definition to an existing declaration
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(188): note: see declaration of 'BTree<T>::split'
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(224): note: definition
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(224): note: 'void BTree<T>::split(int,T *,int *,int,T)'
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(224): note: existing declarations
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(224): note: 'void BTree<T>::split(int,T *,int *)'
-     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(249): error C2244: 'BTree<T>::insert': unable to match function definition to an existing declaration
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(227): note: see declaration of 'BTree<T>::insert'
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(249): note: definition
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(249): note: 'void BTree<T>::insert(int,T *,int *,int,T)'
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(249): note: existing declarations
-         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(249): note: 'void BTree<T>::insert(T)'
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(54): error C2059: syntax error: '('
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(115): note: see reference to class template instantiation 'BTree<T>' being compiled
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(54): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(54): error C2059: syntax error: ')'
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): error C2988: unrecognizable template declaration/definition
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): error C2059: syntax error: '('
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): error C2244: 'BTree<T>::crudRecord': unable to match function definition to an existing declaration
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): note: see declaration of 'BTree<T>::crudRecord'
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): note: definition
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): note: 'void BTree<T>::crudRecord(int,int,int &,T *,int *)'
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): note: existing declarations
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): note: 'int BTree<T>::crudRecord(int,int,int &,T *,int *)'
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(129): error C2059: syntax error: ')'
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(147): error C2143: syntax error: missing ';' before '{'
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(147): error C2447: '{': missing function header (old-style formal list?)
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(221): error C2244: 'BTree<T>::split': unable to match function definition to an existing declaration
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(185): note: see declaration of 'BTree<T>::split'
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(221): note: definition
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(221): note: 'void BTree<T>::split(int,T *,int *,int,T)'
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(221): note: existing declarations
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(221): note: 'void BTree<T>::split(int,T *,int *)'
+     1>c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(246): error C2244: 'BTree<T>::insert': unable to match function definition to an existing declaration
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(224): note: see declaration of 'BTree<T>::insert'
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(246): note: definition
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(246): note: 'void BTree<T>::insert(int,T *,int *,int,T)'
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(246): note: existing declarations
+         c:\users\shiro_saber\documents\analisis_dise-o_algoritmos\problema_práctico1\arbolb\arbolb\b_tree.h(246): note: 'void BTree<T>::insert(T)'
      1>Done Building Project "C:\Users\shiro_saber\Documents\Analisis_Dise-o_Algoritmos\Problema_Práctico1\ArbolB\ArbolB\ArbolB.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.82
+Time Elapsed 00:00:00.83

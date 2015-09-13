@@ -50,6 +50,8 @@ class BTree
     
 	// Opens a file in binary read/write mode, receives the file specification
 	void openFile(std::string);
+
+	void crudRecord(int numOfValues, int recordNumber, int & nodeSize, T * valueArray, int * pointerArray, ((void(*)(std::fstream::* operation))(const char *, std::streamsize)));
     
 	// Writes a record to the file, receives the index it will write into
 	// and references to the values to be stored
@@ -65,7 +67,7 @@ class BTree
 	//Split a record into two
 	void split(int, T*, int*);
     
-	T*
+	T* nuevos;
     
 public:
 	// Constructors
@@ -124,12 +126,7 @@ void BTree<T>::openFile(std::string fileName)
 
 
 template <typename T>
-void BTree<T>::crudRecord(int numOfValues,
-                          int recordNumber,
-                          int& nodeSize,
-                          T* valueArray,
-                          int* pointerArray,
-                          (void (*)(std::fstream::*operation))(const char*, std::streamsize))
+void BTree<T>::crudRecord(int numOfValues, int recordNumber, int& nodeSize, T* valueArray, int* pointerArray, ((void (*)(std::fstream::*operation))(const char*, std::streamsize)))
 {
 	// Move the file pointer to the start of our record
 	fbin->seekp(recordNumber * recSize);
