@@ -26,6 +26,7 @@ public class GridScript : MonoBehaviour {
 	// we use as a template to create each
 	// cell. This is set in Unity's Inspector.
 	public Transform CellPrefab;
+    public Transform Raptor;
 	
 	//Size is a Vector3, denotes the 
 	// size of the Grid we're going to create.
@@ -111,12 +112,12 @@ public class GridScript : MonoBehaviour {
 		// we set the position equal to the center ( X/2 , Z/2 )
 		// cell in the grid. We then add Vector3.up*20f to bring
 		// the camera higher than the cells.
-		Camera.main.transform.position = Grid[(int)(Size.x/2f),(int)(Size.z/2f)].position + Vector3.up*20f;
+		//Camera.main.transform.position = Grid[(int)(Size.x/2f),(int)(Size.z/2f)].position + Vector3.up*20f;
 		//The orthographicSize is calculated using this 
 		// formula.
 		//The higher the max of the X or Z size, the higher the camera
 		// is positioned.
-		Camera.main.orthographicSize = Mathf.Max(Size.x, Size.z);
+		//Camera.main.orthographicSize = Mathf.Max(Size.x, Size.z);
 	}
 	
 	void SetRandomNumbers(){
@@ -222,6 +223,8 @@ public class GridScript : MonoBehaviour {
 		// coded Green, so we apply that to the renderer's
 		// material's color here.
 		Grid[0,0].GetComponent<Renderer>().material.color = Color.green;
+        Transform raptor;
+        raptor = (Transform)Instantiate(Raptor, new Vector3(0, 0, 0), Quaternion.identity);
 		//Now, we add the first cell to the Set.
 		AddToSet(Grid[0,0]);
 	}
