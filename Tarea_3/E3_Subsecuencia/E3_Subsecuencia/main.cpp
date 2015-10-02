@@ -1,5 +1,5 @@
 #ifdef _DEBUG
-#define _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC //unicamente para checar memory leaks.
 #include<iostream>
 
 using namespace std;
