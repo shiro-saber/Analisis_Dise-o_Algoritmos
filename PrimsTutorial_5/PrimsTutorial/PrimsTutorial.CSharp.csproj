@@ -82,13 +82,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CellScript.cs" />
-    <Compile Include="Assets\GridScript.cs" />
+    <Compile Include="Assets\Scripts\CellScript.cs" />
+    <Compile Include="Assets\Scripts\GridScript.cs" />
+    <Compile Include="Assets\Scripts\Raptor_Control.cs" />
+    <Compile Include="Assets\Scripts\Raptor_Movement.cs" />
+    <Compile Include="Assets\Scripts\mover.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\CellScript3.txt" />
-    <None Include="Assets\GridScript3.txt" />
-    <None Include="Assets\GridScriptFinal.txt" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />

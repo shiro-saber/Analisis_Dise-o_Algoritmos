@@ -134,7 +134,7 @@ int main()
 	cout << "El numero de ocurrencia es: ";
 	cout << c[tamkuz - 1][tamsharmuta - 1] << endl << endl;
 
-	system("Pause");
+	cin.get();
 	return 0;
 }
 #endif

@@ -80,6 +80,6 @@ int main()
 	for (int i = 0; i < N; ++i)
 		cout << "El hombre " << i << " quedo con la mujer " << X[i] << "\n";
 
-	system("pause");
+	cin.get();
 	return 0;
 }
