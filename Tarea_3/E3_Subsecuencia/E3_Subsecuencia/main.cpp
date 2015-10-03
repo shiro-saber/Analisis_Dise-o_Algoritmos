@@ -5,7 +5,7 @@
 using namespace std;
 
 char b[100][100];
-int c[100][100];
+int c[100][100]; //la matriz de las ocurrencias
 
 void LCS(char X[], char Y[])
 {
