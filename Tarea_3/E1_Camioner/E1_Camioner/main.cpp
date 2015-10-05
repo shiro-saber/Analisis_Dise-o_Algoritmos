@@ -37,9 +37,9 @@ void paradas(int distancia, int eficiencia)
 			if (kuz > eficiencia)
 			{
 				kuz -= mapa[--siguientegas];
-				cout << "Se detuvo en una gas" << endl;
 				recorrido += kuz;
 				kuz = 0;
+				cout << "Se detuvo en una gas" << endl;
 				paradas++;
 			}
 		}
@@ -53,7 +53,7 @@ void paradas(int distancia, int eficiencia)
 
 int main()
 {
-	int distancia = 275;
+	int distancia = 375;
 	int eficiencia;
 	//agregamos las gasolineras en el camino, cada una tiene su distancia diferente, en el vector solo se guarda la distancia en km
 	mapa.push_back(50);
@@ -61,8 +61,9 @@ int main()
 	mapa.push_back(65);
 	mapa.push_back(43);
 	mapa.push_back(78);
+	mapa.push_back(80);
 
-	cout << "Cual es la eficiencia km/l de tu coche" << endl;
+	cout << "Cuantos km recorre tu coche con tanque lleno." << endl;
 	cin >> eficiencia;
 
 	paradas(distancia, eficiencia);

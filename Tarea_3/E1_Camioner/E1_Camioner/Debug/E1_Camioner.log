@@ -1,4 +1,4 @@
-﻿Build started 03/10/2015 06:07:41 p. m..
+﻿Build started 05/10/2015 01:08:36 a. m..
      1>Project "C:\Users\shiro_saber\Documents\TEC\Analisis_Dise-o_Algoritmos\Tarea_3\E1_Camioner\E1_Camioner\E1_Camioner.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
@@ -11,4 +11,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.00
+Time Elapsed 00:00:01.26
