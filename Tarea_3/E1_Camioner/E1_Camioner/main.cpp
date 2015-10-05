@@ -45,6 +45,7 @@ void paradas(int distancia, int eficiencia)
 		}
 		else
 		{
+			cout << "Se paro " << paradas << " veces en el recorrido" << endl;
 			break;
 		}
 	}
