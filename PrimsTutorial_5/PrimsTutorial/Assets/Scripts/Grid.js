@@ -11,17 +11,20 @@ public var Set = new Array();
 public var CompletedSet = new Array();
 private var RandX : int;
 private var RandZ : int;
+public var mScript : mover;
+private var isPaused;
 
 function Start () {
-	RandZ = Random.Range(1, GridSize.z);
-	RandX = Random.Range(1, GridSize.x);
+	RandZ = Random.Range((GridSize.z/2), GridSize.z);
+	RandX = Random.Range((GridSize.x/2), GridSize.x);
 	CreateGrid();
 	SetStart(0,0);
+	mScript.enabled = false;
 }
 
 function CreateGrid(){ 
 	var maxXZ : int = Mathf.Max(GridSize.x, GridSize.z);
-	Camera.main.transform.position = Vector3(maxXZ/2f, maxXZ, maxXZ/8f);
+//	Camera.main.transform.position = Vector3(maxXZ/2f, maxXZ, maxXZ/8f);
 	var x : int = GridSize.x;
 	var z : int = GridSize.z;
 	GridArr = new Transform[x,z];
@@ -46,7 +49,7 @@ function SetStart(x : int, z : int){
 	GridArr[x,z].GetComponent.<Renderer>().material.color = Color.green;
 }
 function AddToSet(toAdd : Transform){
-	toAdd.GetComponent.<Renderer>().material.color = Color.gray;
+	toAdd.GetComponent.<Renderer>().material.color = Color.black;
 	var taScript : Cell = toAdd.GetComponent("Cell");
 	taScript.IsOpened = true;
 	Set.Unshift(toAdd);
@@ -81,7 +84,7 @@ function FindNext(){
 			if(counter > 4){ 
 				if(previous != GridArr[0,0]){
 					Set.RemoveAt(0);
-					previous.GetComponent.<Renderer>().material.color = Color.black;
+					previous.GetComponent.<Renderer>().material.color = Color.gray;
 				}  
 				return;
 			}  
@@ -116,4 +119,16 @@ function ClearWalls(p : Transform, n : Transform)
 
 function Update () {
 	FindNext ();
+	if(Input.GetKey(KeyCode.Space) && !isPaused)
+	{
+		this.enabled = false;
+		mScript.enabled = true;
+		isPaused = true;
+	}
+	else if (Input.GetKey(KeyCode.Space) && isPaused)
+	{
+		this.enabled = true;
+		mScript.enabled = false;
+		isPaused = false;
+	}
 }
