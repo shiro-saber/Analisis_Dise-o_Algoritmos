@@ -1,9 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GridScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Grid.js">
     <Files>
-      <File FileName="Assets\CellScript.cs" Line="12" Column="1" />
-      <File FileName="Assets\GridScript.cs" Line="87" Column="3" />
+      <File FileName="Assets\Scripts\Grid.js" Line="93" Column="2" />
+      <File FileName="Assets\Scripts\GridScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Cell.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
