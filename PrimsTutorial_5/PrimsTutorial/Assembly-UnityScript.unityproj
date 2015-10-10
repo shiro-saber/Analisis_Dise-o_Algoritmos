@@ -46,8 +46,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Packages\Raptor\Play_animations_Raptor.js" />
-     <Compile Include="Assets\Scripts\Cell.js" />
-     <Compile Include="Assets\Scripts\Grid.js" />
+     <Compile Include="Assets\Scripts\Javascript\Cell.js" />
+     <Compile Include="Assets\Scripts\Javascript\Grid.js" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
