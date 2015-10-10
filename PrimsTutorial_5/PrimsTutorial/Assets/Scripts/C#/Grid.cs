@@ -14,6 +14,10 @@ public class Grid : MonoBehaviour {
 	private int RandZ;
 	private int RandX;
 	private bool acabo = false;
+	Transform newRaptor;
+
+	//public mover mscript;
+	public Transform raptor;
 
 	void Start ()
 	{
@@ -21,6 +25,7 @@ public class Grid : MonoBehaviour {
 		RandX = (int)Random.Range((GridSize.x/2), GridSize.x);
 		CreateGrid ();
 		SetStart (0, 0);
+		//mscript.enabled = false;
 	}
 	Transform[,]GridArr;
 	public void CreateGrid ()
@@ -45,6 +50,9 @@ public class Grid : MonoBehaviour {
 		AddToSet(GridArr[x,z]);
 		GridArr [x, z].GetComponent<Renderer> ().material.color = Color.green;
 		GridArr[x, z].name = string.Format("BEGIN");
+		newRaptor = (Transform)Instantiate (raptor, new Vector3 (0, 0, 0), Quaternion.identity);
+		newRaptor.localScale = new Vector3 (0.2f, 0.2f, 0.2f);
+		newRaptor.GetComponent<mover> ().enabled = false;
 	}
 
 	void AddToSet (Transform n)
@@ -89,7 +97,7 @@ public class Grid : MonoBehaviour {
 				nextZ = prevZ + (int)randDirection.z;
 				randSeed = (randSeed + 1) % 4;
 				counter++;
-				if (counter > 4 && previous != GridArr[0,0]) {
+				if (counter > 4) {
 					AddToCompletedSet (previous);
 					return;
 				}
@@ -107,7 +115,8 @@ public class Grid : MonoBehaviour {
 	{
 		Set.Remove (toAdd);
 		CompletedSet.Add (toAdd);
-		toAdd.GetComponent<Renderer>().material.color = Color.gray;
+		if(toAdd != GridArr[0,0])
+			toAdd.GetComponent<Renderer>().material.color = Color.gray;
 		
 	}
 	
@@ -121,8 +130,13 @@ public class Grid : MonoBehaviour {
 	}
 	void Update ()
 	{
-		if (!acabo) {
-			FindNext();
+		if (!acabo) 
+			FindNext (); 
+		else 
+		{
+			this.enabled = false;
+		//	mscript.enabled = true;
+			newRaptor.GetComponent<mover> ().enabled = true;
 		}
 		if(Input.GetKeyDown(KeyCode.F1))
 		{

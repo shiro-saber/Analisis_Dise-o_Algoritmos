@@ -51,7 +51,7 @@ public class mover : MonoBehaviour {
             {
                 _cindy.GetComponent<Rigidbody>().AddForce(jump2);
                 //print("deberia saltar, hacia adelante");
-                transform.Translate(new Vector3(0f, 0f, 1f * _spdMult));
+                transform.Translate(new Vector3(0f, 0f, 0.2f * _spdMult));
                 Raptor_Control._rotaCindyDerecha = false;
                 Raptor_Control._rotaCindyIzquierda = false;
                 Raptor_Control._cindySalta = true;
@@ -61,7 +61,7 @@ public class mover : MonoBehaviour {
             {
                 //anim.Stop();
                 //anim.CrossFade("Look_right", 0.2f);
-                transform.Rotate(new Vector3(0f, 5f, 0f));
+                transform.Rotate(new Vector3(0f, 7f, 0f));
                 //transform.Translate(new Vector3(0f, 0f, 1f * _spdMult));
 
                 Raptor_Control._rotaCindyDerecha = true;
@@ -74,7 +74,7 @@ public class mover : MonoBehaviour {
                 //transform.Translate(new Vector3(0f, 0f, 1f * _spdMult));
                 //anim.Stop();
                 //anim.CrossFade("Look_left", 0.2f);
-                transform.Rotate(new Vector3(0f, -5f, 0f));
+                transform.Rotate(new Vector3(0f, -7f, 0f));
                 Raptor_Control._rotaCindyDerecha = false;
                 Raptor_Control._rotaCindyIzquierda = true;
                 Raptor_Control._cindySalta = false;
@@ -85,8 +85,8 @@ public class mover : MonoBehaviour {
                 //anim.Stop();
                 //anim.CrossFade("Run", 0.2f);
                 //anim.CrossFade("Look_right", 0.2f);
-                transform.Rotate(new Vector3(0f, 1.5f, 0f));
-                transform.Translate(new Vector3(0f, 0f, 1f * _spdMult));
+                transform.Rotate(new Vector3(0f, 3.5f, 0f));
+                transform.Translate(new Vector3(0f, 0f, 0.2f * _spdMult));
 
                 Raptor_Control._rotaCindyDerecha = false;
                 Raptor_Control._rotaCindyIzquierda = false;
@@ -98,8 +98,8 @@ public class mover : MonoBehaviour {
                 //anim.Stop();
                 //anim.CrossFade("Run", 0.2f);
                 //anim.CrossFade("Look_left", 0.2f);
-                transform.Translate(new Vector3(0f, 0f, 1f * _spdMult));
-                transform.Rotate(new Vector3(0f, -1.5f, 0f));
+                transform.Translate(new Vector3(0f, 0f, 0.2f * _spdMult));
+                transform.Rotate(new Vector3(0f, -3.5f, 0f));
                 Raptor_Control._rotaCindyDerecha = false;
                 Raptor_Control._rotaCindyIzquierda = false;
                 Raptor_Control._cindySalta = false;
@@ -108,7 +108,7 @@ public class mover : MonoBehaviour {
             else if (Input.GetKey(KeyCode.DownArrow) && InAir == false)
             {
                 _cindy.GetComponent<Rigidbody>().AddForce(jump);
-                print("deberia saltar");
+                //print("deberia saltar");
                 Raptor_Control._rotaCindyDerecha = false;
                 Raptor_Control._rotaCindyIzquierda = false;
                 Raptor_Control._cindySalta = true;
@@ -119,7 +119,7 @@ public class mover : MonoBehaviour {
             {
                 //anim.Stop();
                 //anim.CrossFade("Run", 0.2f);
-                transform.Translate(new Vector3(0f, 0f, 1f * _spdMult));
+                transform.Translate(new Vector3(0f, 0f, 0.2f * _spdMult));
                 Raptor_Control._rotaCindyDerecha = false;
                 Raptor_Control._rotaCindyIzquierda = false;
                 Raptor_Control._cindySalta = false;
