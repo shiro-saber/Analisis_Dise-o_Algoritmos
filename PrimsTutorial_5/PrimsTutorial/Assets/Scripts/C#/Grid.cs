@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class Grid : MonoBehaviour {
 	
-	public Transform CellPrefab;//*
-	public Vector3 GridSize;//*
-	public float Buffer;//*
+	public Transform CellPrefab;
+	public Vector3 GridSize;
+	public float Buffer;
 	
 	public List<Transform> Set = new List<Transform>();
 	public List<Transform> CompletedSet = new List<Transform>();
@@ -14,10 +14,15 @@ public class Grid : MonoBehaviour {
 	private int RandZ;
 	private int RandX;
 	private bool acabo = false;
-	Transform newRaptor;
+
+	public Pathfinding p;
 
 	//public mover mscript;
+	Transform newRaptor;
 	public Transform raptor;
+
+	public Transform begin;
+	public Transform end;
 
 	void Start ()
 	{
@@ -25,6 +30,7 @@ public class Grid : MonoBehaviour {
 		RandX = (int)Random.Range((GridSize.x/2), GridSize.x);
 		CreateGrid ();
 		SetStart (0, 0);
+		p.enabled = false;
 		//mscript.enabled = false;
 	}
 	Transform[,]GridArr;
@@ -50,6 +56,8 @@ public class Grid : MonoBehaviour {
 		AddToSet(GridArr[x,z]);
 		GridArr [x, z].GetComponent<Renderer> ().material.color = Color.green;
 		GridArr[x, z].name = string.Format("BEGIN");
+		GridArr[x, z].tag = string.Format("begin");
+		begin = GridArr [x, z];
 		newRaptor = (Transform)Instantiate (raptor, new Vector3 (0, 0, 0), Quaternion.identity);
 		newRaptor.localScale = new Vector3 (0.2f, 0.2f, 0.2f);
 		newRaptor.GetComponent<mover> ().enabled = false;
@@ -106,6 +114,8 @@ public class Grid : MonoBehaviour {
 			nScript = next.GetComponent <Cell> ();
 			GridArr[RandX, RandZ].GetComponent<Renderer>().material.color = Color.red;
 			GridArr[RandX,RandZ].name = string.Format("End");
+			GridArr[RandX, RandZ].tag = string.Format("end");
+			end = GridArr [RandX, RandZ];
 		} while(nScript.IsOpened);
 		ClearWalls (previous, next);
 		AddToSet (next);
@@ -128,17 +138,38 @@ public class Grid : MonoBehaviour {
 			Destroy (hit.transform.gameObject);
 		}
 	}
+
+	public List<Transform> GetNeighbours(Transform node) {
+		List<Transform> neighbours = new List<Transform>();
+		
+		for (int x = -1; x <= 1; x++) {
+			for (int y = -1; y <= 1; y++) {
+				if (x == 0 && y == 0)
+					continue;
+				
+				int checkX =(int)GridSize.x + x;
+				int checkY =(int)GridSize.z + y;
+				
+				if (checkX >= 0 && checkX < GridSize.x && checkY >= 0 && checkY < GridSize.z) {
+					neighbours.Add(GridArr[checkX,checkY]);
+				}
+			}
+		}
+		
+		return neighbours;
+	}
+	public List<Cell> path;
 	void Update ()
 	{
 		if (!acabo) 
 			FindNext (); 
 		else 
 		{
-			this.enabled = false;
-		//	mscript.enabled = true;
+			//this.enabled = false;
+			p.enabled = true;
 			newRaptor.GetComponent<mover> ().enabled = true;
 		}
-		if(Input.GetKeyDown(KeyCode.F1))
+		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			Application.LoadLevel(0);
 		}
