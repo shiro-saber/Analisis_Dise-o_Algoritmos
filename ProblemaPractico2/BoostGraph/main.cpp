@@ -90,12 +90,12 @@ int main()
     }
     
     cout << "Busqueda Cubells" << endl << endl;
-    default_dfs_vistor v;//el tutorial dijo
+    default_dfs_vistor v;//Para recorrer en la funcion
     depth_first_search(g, visitor(v));/*busqueda profunda 1*/
     
     cout << "Busqueda de Amplitud" << endl << endl;
     grafo::vertex_descriptor a = vertex(1,g);//asignamos una variable con los datos del primer vertice del grafo
-    default_bfs_visitor b; //Otra vez el tutorial :P
+    default_bfs_visitor b; //Otra vez para recorrer en la funcion :P
     breadth_first_search(g, a, visitor(b));/*hacemos otra busqueda pero ahora de amplitud*/
 
     cout << "Algoritmo de Prim!" << endl << endl;
