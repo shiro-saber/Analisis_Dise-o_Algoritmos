@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\C#\Grid.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\C#\Pathfinding.cs">
     <Files>
-      <File FileName="Assets\Scripts\C#\Grid.cs" Line="97" Column="42" />
-      <File FileName="Assets\Scripts\C#\Cell.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Javascript\Grid.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\C#\Pathfinding.cs" Line="36" Column="4" />
+      <File FileName="Assets\Scripts\C#\Grid.cs" Line="176" Column="3" />
+      <File FileName="Assets\Scripts\C#\Cell.cs" Line="10" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
