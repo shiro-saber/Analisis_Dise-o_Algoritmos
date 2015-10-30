@@ -1,0 +1,179 @@
+\usepackage{graphicx}
+\graphicspath{ {/home/shiro-saber/Pictures/} }
+\usepackage{listings}
+
+\title{Librería Snap y sus Usos }
+\author{
+        Juan Carlos León Jarquín \\
+                ITC\\
+                A01020200\\
+        ITESM CSF\\
+        }
+\date{\today}
+
+\documentclass[12pt]{article}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Stanford Network Analysis Platform (SNAP) es un análisis de la red de uso general y la biblioteca de la minería gráfico. Está escrito en C ++ y fácilmente escalable para redes grandes con cientos de millones de nodos y miles de millones de bordes. Se manipula eficientemente grandes gráficos, calcula las propiedades estructurales, genera gráficos regulares y al azar, y es compatible con los atributos en los nodos y bordes. \ldots
+\end{abstract}
+
+\section{Introducción}
+Para esta investigación nuestro primer objetivo, asi como el principal, fue el uso de la librería Snap, asi como el uso de Gephi para realizar un nodo, y poder visualizarlo de manera gráfica.
+
+\section{Trabajo Previo}\label{trabajo previo}
+Para conocer lo que es Snap tuvimos que familiarizarnos con lo que es el uso de grafos, así como el uso de la misma librería, para esto se realizaron ejercicios en donde llevamos a cabo algoritmos sobre grafos.
+
+\section{Trabajo en la libreria}\label{trabajo}
+Se realizó un trabajo de investigación en cuanto a la documentación de dicha librería, así como la instalación de recursos como lo son:
+ - GraphMl
+ - GEXF
+ - GDF
+ - JSON
+
+Estos recursos se utilizan para la exportación de grafos, para ingresarlos a un ambiente gráfico (en este caso Gephi), y así poder observar como es un grafo, fuera del ambiente de programación.
+
+\section{Results}\label{results}
+Para terminar, se realizo un programa que importaba un dataset de la libreria Snap, y lo exportaba como un grafo en los formatos arriba vistos, dando como resultado el siguiente código:
+
+\begin{lstlisting}
+#include <iostream>
+#include <fstream>
+#include <ctime>
+#include "stdafx.h"
+
+std::ofstream dormir;
+
+void kuz(PNGraph g)//GraphML
+{
+    dormir.open("archivo.graphml");
+    dormir << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\"\n\t xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\t xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns\n\thttp://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">\n";
+    dormir << "\n <graph id=\"G\" edgedefault=\"directed\">\n";
+
+    for(PNGraph::TObj::TNodeI nodo = g->BegNI(); nodo < g->EndNI(); nodo++)
+        dormir << "<node id=\"" << nodo.GetId() << "\"/>\n";
+
+    for(PNGraph::TObj::TEdgeI vertice = g->BegEI(); vertice < g->EndEI(); vertice++)
+        dormir << "<edge source=\"" << vertice.GetSrcNId() << "\" target=\"" << vertice.GetDstNId() << "\"/>\n";
+
+    dormir << "</graph>" << "\n</graphml>";
+    dormir.close();
+}
+
+void sharmutta(PNGraph g)//GraphGEXF
+{
+    dormir.open("archivo.gexf");
+    dormir << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gexf xmlns=\"http://www.gexf.net/1.2draft\"\n xmlns:xsi=\"http://www.w3.org/2001/XMLSchema−instance\"\n xsi:schemaLocation=\"http://www.gexf.net/1.2draft\n\t\thttp://www.gexf.net/1.2draft/gexf.xsd\"\nversion=\"1.2\">";
+    dormir << "\n<graph defaultedgetype=\"directed\">";
+    dormir << "<nodes>";
+    for (PNGraph::TObj::TNodeI nodo = g->BegNI(); nodo < g->EndNI(); nodo++)
+          dormir << "<node id=\"" << nodo.GetId() <<"\"/>\n";
+      dormir << "</nodes>";
+      dormir << "<edges>";
+      int id = 1;
+      for (PNGraph::TObj::TEdgeI vertice = g->BegEI(); vertice < g->EndEI(); vertice++)
+      {
+          dormir << "<edge id=\"" << id << "\" source=\"" << vertice.GetSrcNId() << "\" target=\"" << vertice.GetDstNId() << "\"/>\n";
+          id++;
+      }
+      dormir << "</edges>";
+      dormir << "</graph>";
+      dormir << "</gexf>";
+      dormir.close();
+}
+
+void kuzemac(PNGraph g) //JSON
+{
+    dormir.open("archivo.json");
+    dormir << "{ \"graph\": {\n\"nodes\": [\n" ;
+
+    for (PNGraph::TObj::TNodeI nodo = g->BegNI(); nodo < g->EndNI(); nodo++)
+    {
+        dormir << "{ \"id\": \"" << nodo.GetId() << "\" }";
+        if (nodo++ != g->EndNI())
+          dormir << " ,\n";
+        else
+          dormir << " ]\n";
+    }
+
+    dormir << "\"edges\": [\n";
+
+    for (PNGraph::TObj::TEdgeI vertice = g->BegEI(); vertice < g->EndEI(); vertice++)
+    {
+          dormir << "{ \"source\": \"" << vertice.GetSrcNId() << "\", \"target\": \"" << vertice.GetDstNId() << "\" }";
+          if (vertice++ != g->EndEI())
+            dormir << " ,\n";
+          else
+            dormir << " ]\n";
+      }
+      dormir << "} }";
+      dormir.close();
+}
+
+void modishness(PNGraph g)//GDF
+{
+    dormir.open("archivo.gdf");
+    dormir << "nodedef>id VARCHAR\n";
+
+    for (PNGraph::TObj::TNodeI nodo = g->BegNI(); nodo < g->EndNI(); nodo++)
+          dormir << nodo.GetId() <<"\n";
+
+    dormir << "edgedef>source VARCHAR, destination VARCHAR\n";
+
+    for (PNGraph::TObj::TEdgeI vertice = g->BegEI(); vertice < g->EndEI(); vertice++)
+          dormir << vertice.GetSrcNId() << "," << vertice.GetDstNId() << "\n";
+
+    dormir.close();
+}
+
+int main()
+{
+    clock_t t;
+    
+    PNGraph g = TSnap::LoadEdgeList<PNGraph>("soc-Slashdot0811.txt",0,1); //creamos el grafo
+
+    kuz(g);
+    t = clock();
+    t= clock() - t;
+    printf("Los segundos fueron %f\n",(float) t/CLOCKS_PER_SEC);
+
+    t = clock();
+    kuzemac(g);
+    t= clock() - t;
+    printf("Los segundos fueron %f\n",(float) t/CLOCKS_PER_SEC);
+
+    t = clock();
+    modishness(g);
+    t= clock() - t;
+    printf("Los segundos fueron %f\n",(float) t/CLOCKS_PER_SEC);
+
+    t = clock();
+    sharmutta(g);
+    t= clock() - t;
+    printf("Los segundos fueron %f\n",(float) t/CLOCKS_PER_SEC);
+
+    return 0;
+}
+\end{lstlisting}
+
+En donde podemos observar, que las complejidades de cada método de exportación, coinciden en O(n^2), ya que en todas estas vemos que debemos utilizar dos ciclos for para poder exportar los grafos.
+
+En la parte de la visualización, utilizamos Gephi, el cuál nos dejaba ver el grafo de la siguiente manera:
+
+\begin{figure}[!htb] % Graphs
+\includegraphics{Grafo}
+\caption{Grafo visto en Gephi}
+\label{Figure:Graphs}
+\end{figure}
+
+\section{Conclusions}\label{conclusions}
+Como conclusión, es importante resaltar que el hecho de poder ver un grafo de manera gráfica, hace que la perspectiva del mismo cambie.
+En cuanto a las exportaciones, me he dado cuenta que su mayor ventaja es que te da el grafo en un formato más manejable, y claro que entre cada tipo de exportación tiene sus pros, ya sea por los recursos, el tiempo que tarda u otro factor.
+En cuanto al uso de Gephi es complicado sacar una conclusión como tal, ya que es un programa que aún tiene muchas cosas por mejorar, desde los recursos limitados que maneja hasta la misma manera de mostrar los grafos.
+
+\bibliographystyle{abbrv}
+\bibliography{main}
+
+\end{document}

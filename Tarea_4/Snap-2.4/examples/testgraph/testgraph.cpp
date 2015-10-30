@@ -25,6 +25,7 @@ _._._._._._._._._._._._._._._._._._._._._.*/
 
 #include <iostream>
 #include <fstream>
+#include <ctime>
 #include "stdafx.h"
 
 /*LLORANDO SANGRE!!!*/
@@ -116,12 +117,29 @@ void modishness(PNGraph g)//GDF
 
 int main()
 {
+    clock_t t;
     /*gracias a Snap se importa con una sola línea*/
     PNGraph g = TSnap::LoadEdgeList<PNGraph>("soc-Slashdot0811.txt",0,1); //creamos el grafo
+
     kuz(g);
+    t = clock();
+    t= clock() - t;
+    printf("Los segundos fueron %f\n",(float) t/CLOCKS_PER_SEC);
+
+    t = clock();
     kuzemac(g);
+    t= clock() - t;
+    printf("Los segundos fueron %f\n",(float) t/CLOCKS_PER_SEC);
+
+    t = clock();
     modishness(g);
+    t= clock() - t;
+    printf("Los segundos fueron %f\n",(float) t/CLOCKS_PER_SEC);
+
+    t = clock();
     sharmutta(g);
+    t= clock() - t;
+    printf("Los segundos fueron %f\n",(float) t/CLOCKS_PER_SEC);
 
     return 0;
 }
