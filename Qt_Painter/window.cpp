@@ -113,9 +113,6 @@ void Window::operationChanged()
         operations.append(operationTable[index]);
         transformedRenderAreas[i]->setOperations(operations);
     }
-
-    //originalRenderArea->translateX();
-
 }
 
 void Window::shapeSelected(int index)

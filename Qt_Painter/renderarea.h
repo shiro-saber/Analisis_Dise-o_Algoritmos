@@ -18,17 +18,14 @@ enum Operation { NoTransformation, Translate, Rotate, ZoomIn, ZoomOut, Reflectio
 
 class RenderArea : public QWidget
 {
-
     Q_OBJECT
-
 public:
     RenderArea(QWidget *parent = 0);
 
-    void translateX();
     bool i;
     void setOperations(const QList<Operation> &operations);
     void setShape(const QPainterPath &shape);
-    void transformPainter(QPainter &painter/*, double trasx, double trasy, int rot, double esc*/);
+    void transformPainter(QPainter &painter);
 
     QSize minimumSizeHint() const;
     QSize sizeHint() const;
@@ -45,10 +42,5 @@ private:
     QPainterPath shape;
     QRect xBoundingRect;
     QRect yBoundingRect;
-
-    double translateY();
-    int rotation();
-    double escala();
-    double r();
 };
 #endif // RENDERAREA_H
