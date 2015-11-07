@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Grid : MonoBehaviour {
-	
+public class Grid : MonoBehaviour
+{
 	public Transform CellPrefab;
 	public Vector3 GridSize;
 	public float Buffer;
@@ -14,6 +14,8 @@ public class Grid : MonoBehaviour {
 	private int RandZ;
 	private int RandX;
 	private bool acabo = false;
+    public int GridX;
+    public int GridY;
 
 	public Pathfinding p;
 
@@ -21,11 +23,13 @@ public class Grid : MonoBehaviour {
 	Transform newRaptor;
 	public Transform raptor;
 
-	public Transform begin;
-	public Transform end;
+	public Cell begin;
+	public Cell end;
 
 	void Start ()
 	{
+        GridX = (int)GridSize.x;
+        GridY = (int)GridSize.y;
 		RandZ = (int)Random.Range((GridSize.z/2), GridSize.z);
 		RandX = (int)Random.Range((GridSize.x/2), GridSize.x);
 		CreateGrid ();
@@ -33,7 +37,7 @@ public class Grid : MonoBehaviour {
 		p.enabled = false;
 		//mscript.enabled = false;
 	}
-	Transform[,]GridArr;
+	public Transform[,]GridArr;
 	public void CreateGrid ()
 	{
 		int x = (int)GridSize.x;
@@ -57,10 +61,7 @@ public class Grid : MonoBehaviour {
 		GridArr [x, z].GetComponent<Renderer> ().material.color = Color.green;
 		GridArr[x, z].name = string.Format("BEGIN");
 		GridArr[x, z].tag = string.Format("begin");
-		begin = GridArr [x, z];
-		newRaptor = (Transform)Instantiate (raptor, new Vector3 (0, 0, 0), Quaternion.identity);
-		newRaptor.localScale = new Vector3 (0.2f, 0.2f, 0.2f);
-		newRaptor.GetComponent<mover> ().enabled = false;
+		begin = GridArr [x, z].GetComponent<Cell>();
 	}
 
 	void AddToSet (Transform n)
@@ -76,7 +77,10 @@ public class Grid : MonoBehaviour {
 	{
 		
 		if (Set.Count == 0) {
-			Debug.Log ("We're done! Took " + Time.timeSinceLevelLoad + " seconds for a " + GridSize.x + " by " + GridSize.z + " grid.");
+            GridArr[RandX, RandZ].GetComponent<Renderer>().material.color = Color.red;
+            GridArr[RandX, RandZ].name = string.Format("End");
+            GridArr[RandX, RandZ].tag = string.Format("end");
+            Debug.Log ("We're done! Took " + Time.timeSinceLevelLoad + " seconds for a " + GridSize.x + " by " + GridSize.z + " grid.");
 			CancelInvoke("FindNext");
 			acabo = true;
 			return;
@@ -112,10 +116,7 @@ public class Grid : MonoBehaviour {
 			} while(nextX < 0 || nextZ < 0 || nextX >= GridSize.x || nextZ >= GridSize.z);
 			next = GridArr [nextX, nextZ];
 			nScript = next.GetComponent <Cell> ();
-			GridArr[RandX, RandZ].GetComponent<Renderer>().material.color = Color.red;
-			GridArr[RandX,RandZ].name = string.Format("End");
-			GridArr[RandX, RandZ].tag = string.Format("end");
-			end = GridArr [RandX, RandZ];
+			end = GridArr [RandX, RandZ].GetComponent<Cell>();
 		} while(nScript.IsOpened);
 		ClearWalls (previous, next);
 		AddToSet (next);
@@ -139,8 +140,8 @@ public class Grid : MonoBehaviour {
 		}
 	}
 
-	public List<Transform> GetNeighbours(Transform node) {
-		List<Transform> neighbours = new List<Transform>();
+	public List<Cell> GetNeighbours(Cell node) {
+		List<Cell> neighbours = new List<Cell>();
 		
 		for (int x = -1; x <= 1; x++) {
 			for (int y = -1; y <= 1; y++) {
@@ -151,23 +152,29 @@ public class Grid : MonoBehaviour {
 				int checkY =(int)GridSize.z + y;
 				
 				if (checkX >= 0 && checkX < GridSize.x && checkY >= 0 && checkY < GridSize.z) {
-					neighbours.Add(GridArr[checkX,checkY]);
+					neighbours.Add(GridArr[checkX,checkY].GetComponent<Cell>());
 				}
 			}
 		}
 		
 		return neighbours;
 	}
-	public List<Cell> path;
+	public List<Transform> path;
 	void Update ()
 	{
 		if (!acabo) 
 			FindNext (); 
 		else 
 		{
-			//this.enabled = false;
+            enabled = false;
 			p.enabled = true;
-			newRaptor.GetComponent<mover> ().enabled = true;
+            newRaptor = (Transform)Instantiate(raptor, new Vector3(0, 0, 0), Quaternion.identity);
+            newRaptor.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            newRaptor.GetComponent<mover>().enabled = false;
+            newRaptor.GetComponent<mover> ().enabled = true;
+            if(Input.GetKeyDown(KeyCode.A))
+                for (int i = 0; i < path.Count; i++)
+                    path[i].GetComponent<Renderer>().material.color = Color.green;
 		}
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
