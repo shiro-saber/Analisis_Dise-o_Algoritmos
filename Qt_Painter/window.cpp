@@ -10,12 +10,12 @@ Window::Window()
     originalRenderArea = new RenderArea();
 
     shapeComboBox = new QComboBox;
-    shapeComboBox->addItem(tr("Clock"));
-    shapeComboBox->addItem(tr("House"));
-    shapeComboBox->addItem(tr("Text"));
-    shapeComboBox->addItem(tr("Truck"));
-    shapeComboBox->addItem(tr("algo"));
-    shapeComboBox->addItem(tr("otro algo"));
+    shapeComboBox->addItem(tr("Reloj"));
+    shapeComboBox->addItem(tr("Casa"));
+    shapeComboBox->addItem(tr("Hola"));
+    shapeComboBox->addItem(tr("Camion"));
+    shapeComboBox->addItem(tr("Estrella"));
+    shapeComboBox->addItem(tr("Overlaped"));
 
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(originalRenderArea, 0, 0);
@@ -26,13 +26,13 @@ Window::Window()
 
         operationComboBoxes[i] = new QComboBox;
         operationComboBoxes[i]->addItem(tr("No transformation"));
-        operationComboBoxes[i]->addItem(tr("Rotate"));
+        operationComboBoxes[i]->addItem(tr("Rotar"));
         operationComboBoxes[i]->addItem(tr("Zoom In"));
         operationComboBoxes[i]->addItem(tr("Zoom Out"));
-        operationComboBoxes[i]->addItem(tr("Translate"));
-        operationComboBoxes[i]->addItem(tr("Reflection X"));
-        operationComboBoxes[i]->addItem(tr("Reflection Y"));
-        operationComboBoxes[i]->addItem(tr("Double Reflection"));
+        operationComboBoxes[i]->addItem(tr("Transladar"));
+        operationComboBoxes[i]->addItem(tr("Refleccion X"));
+        operationComboBoxes[i]->addItem(tr("Refleccion Y"));
+        operationComboBoxes[i]->addItem(tr("Refleccion XY"));
 
         connect(operationComboBoxes[i], SIGNAL(activated(int)),
                 this, SLOT(operationChanged()));
@@ -103,7 +103,6 @@ void Window::setupShapes()
     algo.moveTo(90, 50);
     for (int i = 1; i < 5; ++i)
         algo.lineTo(50 + 40 * cos(0.8 * i * Pi), 50 + 40 * sin(0.8 * i * Pi));
-    //starPath.closeSubpath();
 
     QPainterPath otro_algo;
     otro_algo.moveTo(0.0, 0.0);
