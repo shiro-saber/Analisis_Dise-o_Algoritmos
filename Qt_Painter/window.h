@@ -24,7 +24,6 @@ public slots:
 
 private:
     void setupShapes();
-
     enum { NumTransformedAreas = 6 };
     RenderArea *originalRenderArea;
     RenderArea *transformedRenderAreas[NumTransformedAreas];

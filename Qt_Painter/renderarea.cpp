@@ -56,7 +56,7 @@ void RenderArea::paintEvent(QPaintEvent *event)
 
 void RenderArea::drawCoordinates(QPainter &painter)
 {
-    painter.setPen(Qt::red);
+    painter.setPen(Qt::green);
 
     painter.drawLine(0, 0, 50, 0);
     painter.drawLine(48, -2, 50, 0);
@@ -73,7 +73,7 @@ void RenderArea::drawCoordinates(QPainter &painter)
 
 void RenderArea::drawOutline(QPainter &painter)
 {
-    painter.setPen(Qt::darkGreen);
+    painter.setPen(Qt::black);
     painter.setPen(Qt::DashLine);
     painter.setBrush(Qt::NoBrush);
     painter.drawRect(0, 0, 100, 100);
@@ -81,7 +81,7 @@ void RenderArea::drawOutline(QPainter &painter)
 
 void RenderArea::drawShape(QPainter &painter)
 {
-    painter.fillPath(shape, Qt::green);
+    painter.fillPath(shape, Qt::darkCyan);
 }
 
 void RenderArea::transformPainter(QPainter &painter)
@@ -91,16 +91,16 @@ void RenderArea::transformPainter(QPainter &painter)
         switch (operations[i])
         {
         case Translate:
-            painter.translate(50, 50);
+            painter.translate(20.0, 20.0);
             break;
         case ZoomIn:
-            painter.scale(2, 2);
+            painter.scale(1.5, 1.5);
             break;
         case ZoomOut:
             painter.scale(0.5, 0.5);
             break;
         case Rotate:
-            painter.rotate(65);
+            painter.rotate(125);
             break;
         case ReflectionX:
             painter.scale(1,-1);
@@ -116,4 +116,13 @@ void RenderArea::transformPainter(QPainter &painter)
             ;
         }
     }
+}
+
+double RenderArea::trasX()
+{
+    double x;
+
+    x = QInputDialog::getDouble(this, tr("Input"), tr("Ingresa a donde lo quieres trasladar en x 1-100"), 1, 1, 101, 1);
+
+    return x;
 }

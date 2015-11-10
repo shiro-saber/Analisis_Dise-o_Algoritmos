@@ -20,6 +20,7 @@ class RenderArea : public QWidget
 {
     Q_OBJECT
 public:
+    double trasX();
     RenderArea(QWidget *parent = 0);
 
     bool i;

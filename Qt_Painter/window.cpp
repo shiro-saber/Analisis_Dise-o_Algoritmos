@@ -1,17 +1,21 @@
 #include "window.h"
 
+#include <qmath.h>
 #include <QComboBox>
 #include <QGridLayout>
 
 Window::Window()
 {
-    originalRenderArea = new RenderArea;
+    //double ls2 = ls.trasX();
+    originalRenderArea = new RenderArea();
 
     shapeComboBox = new QComboBox;
     shapeComboBox->addItem(tr("Clock"));
     shapeComboBox->addItem(tr("House"));
     shapeComboBox->addItem(tr("Text"));
     shapeComboBox->addItem(tr("Truck"));
+    shapeComboBox->addItem(tr("algo"));
+    shapeComboBox->addItem(tr("otro algo"));
 
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(originalRenderArea, 0, 0);
@@ -41,11 +45,12 @@ Window::Window()
     setupShapes();
     shapeSelected(0);
 
-    setWindowTitle(tr("Transformaciones"));
+    setWindowTitle("Transformaciones");
 }
 
 void Window::setupShapes()
 {
+    const float Pi = 3.14159;
     QPainterPath truck;
     truck.setFillRule(Qt::WindingFill);
     truck.moveTo(0.0, 87.0);
@@ -93,10 +98,27 @@ void Window::setupShapes()
     QRect fontBoundingRect = QFontMetrics(font).boundingRect(tr("Hello"));
     text.addText(-QPointF(fontBoundingRect.center()), font, tr("Hello"));
 
+    QPainterPath algo;
+    algo.moveTo(1.0, 1.0);
+    algo.moveTo(90, 50);
+    for (int i = 1; i < 5; ++i)
+        algo.lineTo(50 + 40 * cos(0.8 * i * Pi), 50 + 40 * sin(0.8 * i * Pi));
+    //starPath.closeSubpath();
+
+    QPainterPath otro_algo;
+    otro_algo.moveTo(0.0, 0.0);
+    otro_algo.arcTo(20.0, 20.0, 40.0, 40.0, 0.0, 360.0);
+    otro_algo.moveTo(40.0, 40.0);
+    otro_algo.lineTo(40.0, 80.0);
+    otro_algo.lineTo(80.0, 80.0);
+    otro_algo.lineTo(80.0, 40.0);
+
     shapes.append(clock);
     shapes.append(house);
     shapes.append(text);
     shapes.append(truck);
+    shapes.append(algo);
+    shapes.append(otro_algo);
 
     connect(shapeComboBox, SIGNAL(activated(int)), this, SLOT(shapeSelected(int)));
 }
