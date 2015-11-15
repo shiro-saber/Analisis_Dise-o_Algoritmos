@@ -12,7 +12,7 @@ public class mover : MonoBehaviour {
     public Quaternion kuz;
     public Vector3 sharmuta;
     public Quaternion debug;
-    private Rigidbody rigido;
+    //private Rigidbody rigido;
 	// Use this for initialization
 	void Start () {
         kuz = this.transform.rotation;

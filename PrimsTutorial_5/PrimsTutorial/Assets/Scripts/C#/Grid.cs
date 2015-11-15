@@ -23,8 +23,8 @@ public class Grid : MonoBehaviour
 	Transform newRaptor;
 	public Transform raptor;
 
-	public Cell begin;
-	public Cell end;
+	public Transform begin;
+    public Transform end;
 
 	void Start ()
 	{
@@ -42,7 +42,7 @@ public class Grid : MonoBehaviour
 	{
 		int x = (int)GridSize.x;
 		int z = (int)GridSize.z;
-		int maxXZ = Mathf.Max (x, z);
+		//int maxXZ = Mathf.Max (x, z);
 		GridArr = new Transform[x, z];
 		Transform newCell;
 		for (int ix = 0; ix < x; ix++) {
@@ -61,7 +61,7 @@ public class Grid : MonoBehaviour
 		GridArr [x, z].GetComponent<Renderer> ().material.color = Color.green;
 		GridArr[x, z].name = string.Format("BEGIN");
 		GridArr[x, z].tag = string.Format("begin");
-		begin = GridArr [x, z].GetComponent<Cell>();
+        begin = GridArr[x, z];
 	}
 
 	void AddToSet (Transform n)
@@ -80,7 +80,7 @@ public class Grid : MonoBehaviour
             GridArr[RandX, RandZ].GetComponent<Renderer>().material.color = Color.red;
             GridArr[RandX, RandZ].name = string.Format("End");
             GridArr[RandX, RandZ].tag = string.Format("end");
-            Debug.Log ("We're done! Took " + Time.timeSinceLevelLoad + " seconds for a " + GridSize.x + " by " + GridSize.z + " grid.");
+            Debug.Log ("We're done! Took " + Time.time + " seconds for a " + GridSize.x + " by " + GridSize.z + " grid.");
 			CancelInvoke("FindNext");
 			acabo = true;
 			return;
@@ -116,7 +116,7 @@ public class Grid : MonoBehaviour
 			} while(nextX < 0 || nextZ < 0 || nextX >= GridSize.x || nextZ >= GridSize.z);
 			next = GridArr [nextX, nextZ];
 			nScript = next.GetComponent <Cell> ();
-			end = GridArr [RandX, RandZ].GetComponent<Cell>();
+			end = GridArr [RandX, RandZ];
 		} while(nScript.IsOpened);
 		ClearWalls (previous, next);
 		AddToSet (next);
@@ -140,23 +140,23 @@ public class Grid : MonoBehaviour
 		}
 	}
 
-	public List<Cell> GetNeighbours(Cell node) {
-		List<Cell> neighbours = new List<Cell>();
-		
+	public List<Transform> GetNeighbours(Cell node)
+    {
+		List<Transform> neighbours = new List<Transform>();
 		for (int x = -1; x <= 1; x++) {
 			for (int y = -1; y <= 1; y++) {
 				if (x == 0 && y == 0)
 					continue;
 				
-				int checkX =(int)GridSize.x + x;
-				int checkY =(int)GridSize.z + y;
+				int checkX =(int)node.Position.x + x;
+				int checkY =(int)node.Position.z + y;
 				
 				if (checkX >= 0 && checkX < GridSize.x && checkY >= 0 && checkY < GridSize.z) {
-					neighbours.Add(GridArr[checkX,checkY].GetComponent<Cell>());
+					neighbours.Add(GridArr[checkX,checkY]);
 				}
 			}
-		}
-		
+            //neighbours[x].GetComponent<Renderer>().material.color = Color.magenta;
+        }
 		return neighbours;
 	}
 	public List<Transform> path;
@@ -167,14 +167,10 @@ public class Grid : MonoBehaviour
 		else 
 		{
             enabled = false;
-			p.enabled = true;
-            newRaptor = (Transform)Instantiate(raptor, new Vector3(0, 0, 0), Quaternion.identity);
-            newRaptor.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-            newRaptor.GetComponent<mover>().enabled = false;
+			newRaptor = (Transform)Instantiate(raptor, new Vector3(0, 0, 0), Quaternion.identity);
+            newRaptor.localScale = new Vector3(0.15f, 0.15f, 0.15f);
             newRaptor.GetComponent<mover> ().enabled = true;
-            if(Input.GetKeyDown(KeyCode.A))
-                for (int i = 0; i < path.Count; i++)
-                    path[i].GetComponent<Renderer>().material.color = Color.green;
+            p.enabled = true;
 		}
 		if(Input.GetKeyDown(KeyCode.Space))
 		{

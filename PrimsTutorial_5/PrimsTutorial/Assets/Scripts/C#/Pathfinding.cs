@@ -6,70 +6,58 @@ public class Pathfinding : MonoBehaviour {
 	Grid grid;
 	Transform end;
 	Transform begin;
+    bool pathend;
 	// Use this for initialization
 	void Start () {
 		grid = GetComponent<Grid>();
-		begin = grid.begin.GetComponent<Transform>();
-		end = grid.end.GetComponent<Transform>();
-        //grid.GetComponents<Cell>().material.color = Color.blue;
+		begin = grid.begin;
+		end = grid.end;
 	}
 
-	void FindPath(Vector3 startPos, Vector3 targetPos)
+	public void FindPath(Vector3 startPos, Vector3 targetPos)
     {
 		List<Transform> openSet = new List<Transform>();
 		HashSet<Transform> closedSet = new HashSet<Transform>();
         openSet.Add(begin.GetComponent<Transform>());
 
-        print(openSet.Count);
-
 		while (openSet.Count > 0)
         {
-            print("ESO");
-
             Transform currentNode = openSet[0];
-            //print("nodo: " + currentNode.position.x + ", " + currentNode.position.y);
-            //currentNode.GetComponent<Renderer>().material.color = Color.blue;
-
+            
             for (int i = 0; i < openSet.Count; i++)
             {
                 if (openSet[i].GetComponent<Cell>().fCost < currentNode.GetComponent<Cell>().fCost || openSet[i].GetComponent<Cell>().fCost == currentNode.GetComponent<Cell>().fCost && openSet[i].GetComponent<Cell>().hCost < currentNode.GetComponent<Cell>().hCost)
                     currentNode = openSet[i];
-                print("ACA LLEGUE");
-                print(openSet[i].position);
+                print("Todo bien despues de agregar el actual al set");
             }
 
-            print("PARA CUANDO COINCIDAN");
-			openSet.Remove(currentNode);
+            openSet.Remove(currentNode);
 			closedSet.Add(currentNode);
 
-            print(currentNode.position);
-            print(end.position);
-			if (currentNode == end.GetComponent<Transform>()) {
+            if (currentNode == end) {
                 print("LLEGUE AL NODO FINAL");
-				RetracePath(begin.GetComponent<Transform>(),end.GetComponent<Transform>());
+				RetracePath(begin,end);
 				return;
 			}
 
-            foreach (Cell neighbour in grid.GetNeighbours(currentNode.GetComponent<Cell>()))
+            foreach (Transform neighbour in grid.GetNeighbours(currentNode.GetComponent<Cell>()))
             {
-                if (closedSet.Contains(neighbour.GetComponent<Transform>()))
-                {
-                    print("Si logre aqui");
+                if (closedSet.Contains(neighbour.GetComponent<Transform>()) || !neighbour.GetComponent<Cell>().IsOpened)
                     continue;
-                }
-
+            
                 int newMovementCostToNeighbour = currentNode.GetComponent<Cell>().gCost + GetDistance(currentNode, neighbour.GetComponent<Transform>());
-                if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour.GetComponent<Transform>()))
+                if (newMovementCostToNeighbour < neighbour.GetComponent<Cell>().gCost || !openSet.Contains(neighbour.GetComponent<Transform>()))
                 {
-                    print("LO LOGRE");
-                    neighbour.gCost = newMovementCostToNeighbour;
-                    neighbour.hCost = GetDistance(neighbour.GetComponent<Transform>(), end);
-                    neighbour.parent = currentNode.GetComponent<Cell>();
-                    print("Corro bien aqui");
+                    neighbour.GetComponent<Cell>().gCost = newMovementCostToNeighbour;
+                    neighbour.GetComponent<Cell>().hCost = GetDistance(neighbour.GetComponent<Transform>(), end.GetComponent<Transform>());
+                    neighbour.parent = currentNode;
+                    print("Pase hasta definir los costos");
+                   
                     if (!openSet.Contains(neighbour.GetComponent<Transform>()))
-                        print("LO ALEGRE");
-                    openSet.Add(neighbour.GetComponent<Transform>());
-                    print(neighbour.Position);
+                    {
+                        openSet.Add(neighbour.GetComponent<Transform>());
+                        neighbour.GetComponent<Renderer>().material.color = Color.blue;
+                    }
                 }
             }
 		}
@@ -80,15 +68,12 @@ public class Pathfinding : MonoBehaviour {
 		Transform currentNode = endNode;
 		
 		while (currentNode != startNode) {
-            print("Estoy pintando!");
-			path.Add(currentNode);
+            path.Add(currentNode);
 			currentNode = currentNode.parent;
 			currentNode.GetComponent<Renderer>().material.color = Color.yellow;
 		}
 		path.Reverse();
-		
-		grid.path = path;
-		
+        pathend = true;
 	}
 
 	int GetDistance(Transform nodeA, Transform nodeB) {
@@ -101,18 +86,15 @@ public class Pathfinding : MonoBehaviour {
 		return 14*dstX + 10 * (dstY-dstX);
 	}
 
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKey (KeyCode.A)) {
-			FindPath (begin.position, end.position);
-            //print ("Deberia pero huevos");
-		}
-		//proposito de debug
-		/*if (Input.GetKey (KeyCode.A)) {
-			print ((string)end.tag);
-			print (end.position);
-			print ((string)begin.tag);
-			print (begin.position);
-		}*/
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        if (!pathend)
+            FindPath(begin.GetComponent<Transform>().position, end.GetComponent<Transform>().position);
+        else
+        {
+            Debug.Log("Pathfinding done! Took " + Time.time + " seconds");
+            enabled = false;
+        }
+    }
 }
