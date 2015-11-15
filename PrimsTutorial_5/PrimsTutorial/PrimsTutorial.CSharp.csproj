@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\C#\Cell.cs" />
+    <Compile Include="Assets\Scripts\C#\Export_Data.cs" />
     <Compile Include="Assets\Scripts\C#\Grid.cs" />
     <Compile Include="Assets\Scripts\C#\Pathfinding.cs" />
   </ItemGroup>
