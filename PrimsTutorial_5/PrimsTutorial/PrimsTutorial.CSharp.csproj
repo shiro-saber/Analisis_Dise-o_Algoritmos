@@ -77,10 +77,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\C#\Cell.cs" />
     <Compile Include="Assets\Scripts\C#\Export_Data.cs" />
-    <Compile Include="Assets\Scripts\C#\Grid.cs" />
-    <Compile Include="Assets\Scripts\C#\Pathfinding.cs" />
+    <Compile Include="Assets\Scripts\C#\Prim\CellScript.cs" />
+    <Compile Include="Assets\Scripts\C#\Prim\GridScript.cs" />
+    <Compile Include="Assets\Scripts\C#\Prim\PathScript.cs" />
+    <Compile Include="Assets\Scripts\C#\Recursive Backtrack\Cell.cs" />
+    <Compile Include="Assets\Scripts\C#\Recursive Backtrack\Grid.cs" />
+    <Compile Include="Assets\Scripts\C#\Recursive Backtrack\Pathfinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />

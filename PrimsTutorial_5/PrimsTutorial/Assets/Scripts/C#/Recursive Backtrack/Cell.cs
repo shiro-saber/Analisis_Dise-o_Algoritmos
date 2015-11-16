@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Cell : MonoBehaviour {
+public class Cell : MonoBehaviour
+{
 	public Vector3 Position;
 	public bool IsOpened;
 
@@ -10,8 +11,10 @@ public class Cell : MonoBehaviour {
 	public int hCost;
 	public Cell parent;
 
-	public int fCost {
-		get {
+	public int fCost
+    {
+		get
+        {
 			return gCost + hCost;
 		}
 	}
