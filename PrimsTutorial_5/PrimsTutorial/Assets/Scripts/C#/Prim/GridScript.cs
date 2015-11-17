@@ -9,16 +9,21 @@ public class GridScript : MonoBehaviour {
     public PathScript p;
     public Transform begin;
     public Transform end;
-
+    public Export_Data e;
+    bool acabo;
+    float time;
     // Use this for initialization
     void Start()
     {
-		CreateGrid();
+        p.enabled = false;
+        acabo = false;
+        time = Time.time;
+        CreateGrid();
 		SetRandomNumbers();
 		SetAdjacents();
 		SetStart();
 		FindNext();
-	}
+    }
 	
 	void CreateGrid()
     {
@@ -33,8 +38,8 @@ public class GridScript : MonoBehaviour {
 				Grid[x,z] = newCell;
 			}
 		}
-		//Camera.main.transform.position = Grid[(int)(Size.x/2f),(int)(Size.z/2f)].position + Vector3.up*20f;
-		//Camera.main.orthographicSize = Mathf.Max(Size.x, Size.z);
+		Camera.main.transform.position = Grid[(int)(Size.x/2f),(int)(Size.z/2f)].position + Vector3.up*20f;
+		Camera.main.orthographicSize = Mathf.Max(Size.x, Size.z);
 	}
 	
 	void SetRandomNumbers()
@@ -123,7 +128,8 @@ public class GridScript : MonoBehaviour {
 
             if (empty)
             {
-                Debug.Log("We're Done, "+Time.timeSinceLevelLoad+" seconds taken"); 
+                e.primTimes.Add(time);
+                Debug.Log("We're Done, "+ time +" seconds taken"); 
 				CancelInvoke("FindNext");
                 end = Set[Set.Count - 1];
 				Set[Set.Count - 1].GetComponent<Renderer>().material.color = Color.cyan;
@@ -140,7 +146,7 @@ public class GridScript : MonoBehaviour {
                         cell.name = "NO WALKABLE";
 					}
 				}
-                //acabo = true;
+                acabo = true;
                 return;
             }
 			next = AdjSet[lowestList][0];
@@ -148,6 +154,8 @@ public class GridScript : MonoBehaviour {
 		}while(next.GetComponent<CellScript>().AdjacentsOpened >= 2);
 
         next.GetComponent<Renderer>().material.color = Color.magenta;
+        next.tag = "WALKABLE";
+        next.name = "WALKABLE";
 		AddToSet(next);
 		Invoke("FindNext", 0);
 	}
@@ -172,7 +180,8 @@ public class GridScript : MonoBehaviour {
                 int checkY = (int)node.Position.z + y;
 
                 if (checkX >= 0 && checkX < Size.x && checkY >= 0 && checkY < Size.z)
-                    neighbours.Add(Grid[checkX, checkY]);
+                    if(Grid[checkX, checkY].tag == "WALKABLE" || Grid[checkX, checkY].tag == "BEGIN" || Grid[checkX, checkY].tag == "END")
+                        neighbours.Add(Grid[checkX, checkY]);
             }
         }
         return neighbours;
@@ -180,10 +189,7 @@ public class GridScript : MonoBehaviour {
 
     void Update()
     {
-		if(Input.GetKeyDown(KeyCode.F1))
-			Application.LoadLevel(0);
-
-        //if (acabo)
-           //p.enabled = true;
+        if (acabo == true)
+           p.enabled = true;
     }
 }

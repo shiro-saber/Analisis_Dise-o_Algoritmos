@@ -27,18 +27,14 @@ public class Pathfinding : MonoBehaviour {
             Transform currentNode = openSet[0];
             
             for (int i = 0; i < openSet.Count; i++)
-            {
                 if (openSet[i].GetComponent<Cell>().fCost < currentNode.GetComponent<Cell>().fCost || openSet[i].GetComponent<Cell>().fCost == currentNode.GetComponent<Cell>().fCost && openSet[i].GetComponent<Cell>().hCost < currentNode.GetComponent<Cell>().hCost)
                     currentNode = openSet[i];
-                //print("Todo bien despues de agregar el actual al set");
-            }
-
+            
             openSet.Remove(currentNode);
 			closedSet.Add(currentNode);
 
             if (currentNode == end) {
-                //print("LLEGUE AL NODO FINAL");
-				RetracePath(begin,end);
+            	RetracePath(begin,end);
 				return;
 			}
 
@@ -53,7 +49,6 @@ public class Pathfinding : MonoBehaviour {
                     neighbour.GetComponent<Cell>().gCost = newMovementCostToNeighbour;
                     neighbour.GetComponent<Cell>().hCost = GetDistance(neighbour, end);
                     neighbour.parent = currentNode;
-                    //print("Pase hasta definir los costos");
                    
                     if (!openSet.Contains(neighbour.GetComponent<Transform>()) && neighbour.GetComponent<Cell>().GetComponentInChildren<Cell>().tag != "pared")
                     {
@@ -76,8 +71,11 @@ public class Pathfinding : MonoBehaviour {
 			currentNode.GetComponent<Renderer>().material.color = Color.magenta;
 		}
 		path.Reverse();
+        time = Time.time;
+        e.pathTimes.Add(time);
+        Debug.Log("Pathfinding done! Took " + time + " seconds");
         pathend = true;
-	}
+    }
 
 	int GetDistance(Transform nodeA, Transform nodeB)
     {
@@ -95,12 +93,8 @@ public class Pathfinding : MonoBehaviour {
     {
         if (!pathend)
             FindPath(begin.GetComponent<Transform>().position, end.GetComponent<Transform>().position);
-        else
-        {
-            time = Time.time;
-            e.pathTimes.Add(time);
-            Debug.Log("Pathfinding done! Took " + time + " seconds");
-            enabled = false;
-        }
+        
+        if (Input.GetKey(KeyCode.KeypadEnter) && pathend)
+            Application.LoadLevel(1);
     }
 }

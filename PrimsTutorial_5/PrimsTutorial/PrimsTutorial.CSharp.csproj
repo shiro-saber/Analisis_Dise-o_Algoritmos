@@ -77,7 +77,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\C#\Export_Data.cs" />
+    <Compile Include="Assets\Scripts\C#\Go_levels\Export_Data.cs" />
+    <Compile Include="Assets\Scripts\C#\Go_levels\go_Export.cs" />
+    <Compile Include="Assets\Scripts\C#\Go_levels\go_growing.cs" />
+    <Compile Include="Assets\Scripts\C#\Go_levels\go_prim.cs" />
     <Compile Include="Assets\Scripts\C#\Prim\CellScript.cs" />
     <Compile Include="Assets\Scripts\C#\Prim\GridScript.cs" />
     <Compile Include="Assets\Scripts\C#\Prim\PathScript.cs" />

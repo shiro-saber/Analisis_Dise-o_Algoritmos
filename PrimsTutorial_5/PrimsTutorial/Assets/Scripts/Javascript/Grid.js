@@ -11,7 +11,6 @@ public var Set = new Array();
 public var CompletedSet = new Array();
 private var RandX : int;
 private var RandZ : int;
-public var mScript : mover;
 private var isPaused;
 
 function Start () {
@@ -19,7 +18,6 @@ function Start () {
 	RandX = Random.Range((GridSize.x/2), GridSize.x);
 	CreateGrid();
 	SetStart(0,0);
-	mScript.enabled = false;
 }
 
 function CreateGrid(){ 
@@ -122,13 +120,11 @@ function Update () {
 	if(Input.GetKey(KeyCode.Space) && !isPaused)
 	{
 		this.enabled = false;
-		mScript.enabled = true;
 		isPaused = true;
 	}
 	else if (Input.GetKey(KeyCode.Space) && isPaused)
 	{
 		this.enabled = true;
-		mScript.enabled = false;
 		isPaused = false;
 	}
 }

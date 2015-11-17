@@ -4,14 +4,16 @@ using System.Collections.Generic;
 
 public class PathScript : MonoBehaviour
 {
+    public Export_Data e;
     GridScript g;
     Transform begin;
     Transform end;
     bool pathend;
-
+    float time;
 	// Use this for initialization
 	void Start ()
     {
+        time = Time.time;
         pathend = false;
         g = GetComponent<GridScript>();
         begin = g.begin;
@@ -46,7 +48,7 @@ public class PathScript : MonoBehaviour
                 return;
             }
 
-            foreach (Transform neighbour in currentNode.GetComponent<CellScript>().Adjacents)
+            foreach (Transform neighbour in g.GetNeighbours(currentNode.GetComponent<CellScript>()))
             {
                 if (closedSet.Contains(neighbour.GetComponent<Transform>()))
                     continue;
@@ -79,9 +81,11 @@ public class PathScript : MonoBehaviour
         {
             path.Add(currentNode);
             currentNode = currentNode.parent;
-            currentNode.GetComponent<Renderer>().material.color = Color.magenta;
+            currentNode.GetComponent<Renderer>().material.color = Color.yellow;
         }
         path.Reverse();
+        e.primTimes.Add(time);
+        Debug.Log("Pathfinding done! Took " + time + " seconds");
         pathend = true;
     }
 
@@ -99,13 +103,12 @@ public class PathScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if(Input.GetKey(KeyCode.A))
-            FindParth(begin.position, end.position);
-
         if (pathend)
         {
-            Debug.Log("Pathfinding done! Took " + Time.time + " seconds");
-            enabled = false;
+            if (Input.GetKey(KeyCode.Space))
+                Application.LoadLevel(1);
         }
+        else
+            FindParth(begin.position, end.position);
     }
 }

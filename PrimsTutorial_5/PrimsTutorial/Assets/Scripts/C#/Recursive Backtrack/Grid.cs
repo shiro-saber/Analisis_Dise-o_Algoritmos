@@ -7,39 +7,24 @@ public class Grid : MonoBehaviour
     public Transform CellPrefab;
     public Vector3 GridSize;
     public float Buffer;
-
     public List<Transform> Set = new List<Transform>();
     public List<Transform> CompletedSet = new List<Transform>();
-
     private int RandZ;
     private int RandX;
     private bool acabo = false;
-    //public int GridX;
-    //public int GridY;
     public float time;
-    public Export_Data e;
-
+    public Export_Data e; //para exportar (aun se esta trabajando)
     public Pathfinding p;
-
-    //public mover mscript;
-    //Transform newRaptor;
-    //public Transform raptor;
-
-    public Transform begin;
-    public Transform end;
-
-    //public GameObject game;
+    public Transform begin; //para el pathfinding
+    public Transform end; //para el pathfinding
 
     void Start()
     {
-        //GridX = (int)GridSize.x;
-        //GridY = (int)GridSize.y;
         RandZ = (int)Random.Range((GridSize.z), GridSize.z);
         RandX = (int)Random.Range((GridSize.x / 2), GridSize.x);
         CreateGrid();
         SetStart(0, 0);
         p.enabled = false;
-        //mscript.enabled = false;
     }
     public Transform[,] GridArr;
     public void CreateGrid()
@@ -60,15 +45,13 @@ public class Grid : MonoBehaviour
                 GridArr[ix, iz] = newCell;
             }
         }
-        //Camera.main.transform.position = GridArr[(int)(GridSize.x / 2f), (int)(GridSize.z / 2f)].position + Vector3.up * 20f;
-        //Camera.main.orthographicSize = maxXZ;
     }
     void SetStart(int x, int z)
     {
         AddToSet(GridArr[x, z]);
         GridArr[x, z].GetComponent<Renderer>().material.color = Color.green;
         GridArr[x, z].name = string.Format("BEGIN");
-        GridArr[x, z].tag = string.Format("begin");
+        GridArr[x, z].tag = string.Format("BEGIN");
         begin = GridArr[x, z];
     }
 
@@ -88,9 +71,9 @@ public class Grid : MonoBehaviour
         {
             GridArr[RandX, RandZ - 1].GetComponent<Renderer>().material.color = Color.red;
             GridArr[RandX, RandZ - 1].name = string.Format("End");
-            GridArr[RandX, RandZ - 1].tag = string.Format("end");
-            e.mazeTimes.Add(time);
+            GridArr[RandX, RandZ - 1].tag = string.Format("END");
             time = Time.time;
+            e.mazeTimes.Add(time);
             Debug.Log("We're done! Took " + time + " seconds for a " + GridSize.x + " by " + GridSize.z + " grid.");
             CancelInvoke("FindNext");
             acabo = true;
@@ -173,7 +156,7 @@ public class Grid : MonoBehaviour
                 int checkX = (int)node.Position.x + x;
                 int checkY = (int)node.Position.z + y;
 
-                for(int i = 0; i < CompletedSet.Count; i++)
+                for (int i = 0; i < CompletedSet.Count; i++)
                     if (checkX >= 0 && checkX < GridSize.x && checkY >= 0 && checkY < GridSize.z && GridArr[checkX, checkY] != CompletedSet[i])
                         neighbours.Add(GridArr[checkX, checkY]);
 
@@ -191,10 +174,6 @@ public class Grid : MonoBehaviour
         {
             enabled = false;
             p.enabled = true;
-        }
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            Application.LoadLevel(0);
         }
     }
 }
