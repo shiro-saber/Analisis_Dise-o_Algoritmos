@@ -13,7 +13,7 @@ public class Grid : MonoBehaviour
     private int RandX;
     private bool acabo = false;
     public float time;
-    public Export_Data e; //para exportar (aun se esta trabajando)
+    public Export_Data e = new Export_Data(); //para exportar (aun se esta trabajando)
     public Pathfinding p;
     public Transform begin; //para el pathfinding
     public Transform end; //para el pathfinding
@@ -124,7 +124,7 @@ public class Grid : MonoBehaviour
         Set.Remove(toAdd);
         CompletedSet.Add(toAdd);
         if (toAdd != GridArr[0, 0])
-            toAdd.GetComponent<Renderer>().material.color = Color.gray;
+            toAdd.GetComponent<Renderer>().material.color = Color.magenta;
 
     }
 

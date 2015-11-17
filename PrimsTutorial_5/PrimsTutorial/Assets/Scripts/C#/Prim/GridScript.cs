@@ -9,7 +9,7 @@ public class GridScript : MonoBehaviour {
     public PathScript p;
     public Transform begin;
     public Transform end;
-    public Export_Data e;
+    public Export_Data e = new Export_Data();
     bool acabo;
     float time;
     // Use this for initialization
@@ -167,20 +167,18 @@ public class GridScript : MonoBehaviour {
         {
             for (int y = -1; y <= 1; y++)
             {
-                if (x == -1 && y == -1)
-                    continue;
-
                 if (x == 0 && y == 0)
                     continue;
-
-                if (x == 1 && y == 1)
+                else if (x == -1 && y == -1)
                     continue;
+                else if (x == 1 && y == 1)
+                    continue;
+                
+                 int checkX = (int)node.Position.x + x;
+                 int checkY = (int)node.Position.z + y;
 
-                int checkX = (int)node.Position.x + x;
-                int checkY = (int)node.Position.z + y;
-
-                if (checkX >= 0 && checkX < Size.x && checkY >= 0 && checkY < Size.z)
-                    if(Grid[checkX, checkY].tag == "WALKABLE" || Grid[checkX, checkY].tag == "BEGIN" || Grid[checkX, checkY].tag == "END")
+                 if (checkX >= 0 && checkX < Size.x && checkY >= 0 && checkY < Size.z)
+                    if (Grid[checkX, checkY].tag == "WALKABLE" || Grid[checkX, checkY].tag == "BEGIN" || Grid[checkX, checkY].tag == "END")
                         neighbours.Add(Grid[checkX, checkY]);
             }
         }

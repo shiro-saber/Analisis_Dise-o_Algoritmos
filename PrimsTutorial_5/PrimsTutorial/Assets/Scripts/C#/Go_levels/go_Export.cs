@@ -2,11 +2,10 @@
 using System.Collections;
 
 public class go_Export : MonoBehaviour {
-    public Export_Data e;
+    public Export_Data e = new Export_Data();
 	// Use this for initialization
 	void Start ()
     {
-        e.enabled = false;
 	}
 	
 	// Update is called once per frame

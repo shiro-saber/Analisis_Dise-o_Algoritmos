@@ -6,7 +6,7 @@ public class Pathfinding : MonoBehaviour {
 	Grid grid;
 	Transform end;
 	Transform begin;
-    public Export_Data e;
+    public Export_Data e = new Export_Data();
     bool pathend;
     public float time;
 	// Use this for initialization
@@ -68,7 +68,7 @@ public class Pathfinding : MonoBehaviour {
 		while (currentNode != startNode) {
             path.Add(currentNode);
 			currentNode = currentNode.parent;
-			currentNode.GetComponent<Renderer>().material.color = Color.magenta;
+			currentNode.GetComponent<Renderer>().material.color = Color.yellow;
 		}
 		path.Reverse();
         time = Time.time;

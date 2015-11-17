@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PathScript : MonoBehaviour
 {
-    public Export_Data e;
+    public Export_Data e = new Export_Data();
     GridScript g;
     Transform begin;
     Transform end;

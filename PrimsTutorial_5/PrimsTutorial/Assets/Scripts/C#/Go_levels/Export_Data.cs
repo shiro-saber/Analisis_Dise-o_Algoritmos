@@ -5,7 +5,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Export_Data : MonoBehaviour {
+public class Export_Data{
     private List<string[]> rowData = new List<string[]>();
     public List<float> mazeTimes = new List<float>();
     public List<float> pathTimes = new List<float>();
@@ -34,8 +34,7 @@ public class Export_Data : MonoBehaviour {
                 rowData.Add(rowDataTemp);
             }
         }
-        else
-            print("NADA QUE EXPORTAR");
+       
 
         if (mazeTimes.Count != 0 && pathTimes.Count != 0)
         {
@@ -73,8 +72,7 @@ public class Export_Data : MonoBehaviour {
             sb.AppendLine(string.Join(delimiter, output[l]));
 
         string filePath = getPath();
-        print(filePath);
-
+        
         StreamWriter outStream = System.IO.File.CreateText(filePath);
         outStream.WriteLine(sb);
         outStream.Close();
