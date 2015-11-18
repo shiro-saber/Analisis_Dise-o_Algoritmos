@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\C#\Recursive Backtrack\Cell.cs" />
     <Compile Include="Assets\Scripts\C#\Recursive Backtrack\Grid.cs" />
     <Compile Include="Assets\Scripts\C#\Recursive Backtrack\Pathfinding.cs" />
+    <Compile Include="Assets\Scripts\C#\Recursive Backtrack\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />

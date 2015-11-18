@@ -17,6 +17,8 @@ public class Grid : MonoBehaviour
     public Pathfinding p;
     public Transform begin; //para el pathfinding
     public Transform end; //para el pathfinding
+    Transform prevCell = null;
+    Transform nextCell = null;
 
     void Start()
     {
@@ -31,7 +33,6 @@ public class Grid : MonoBehaviour
     {
         int x = (int)GridSize.x;
         int z = (int)GridSize.z;
-        int maxXZ = Mathf.Max(x, z);
         GridArr = new Transform[x, z];
         Transform newCell;
         for (int ix = 0; ix < x; ix++)
@@ -133,7 +134,9 @@ public class Grid : MonoBehaviour
         RaycastHit[] hitInfo;
         hitInfo = Physics.RaycastAll(p.position + Vector3.up, n.position - p.position, Buffer);
         foreach (RaycastHit hit in hitInfo)
+        {
             Destroy(hit.transform.gameObject);
+        }
     }
 
     public List<Transform> GetNeighbours(Cell node)
@@ -153,13 +156,36 @@ public class Grid : MonoBehaviour
                 if (x == 1 && y == 1)
                     continue;
 
+                if (x == -1 && y == 1)
+                    continue;
+
+                if (x == 1 && y == -1)
+                    continue;
+
                 int checkX = (int)node.Position.x + x;
                 int checkY = (int)node.Position.z + y;
-
-                for (int i = 0; i < CompletedSet.Count; i++)
-                    if (checkX >= 0 && checkX < GridSize.x && checkY >= 0 && checkY < GridSize.z && GridArr[checkX, checkY] != CompletedSet[i])
-                        neighbours.Add(GridArr[checkX, checkY]);
-
+             
+                if (checkX >= 0 && checkX < GridSize.x && checkY >= 0 && checkY < GridSize.z)
+                {
+                    foreach (Transform t in node.transform)
+                    {
+                        //nextCell = GridArr[checkX, checkY];
+                        //neighbours.Add(nextCell);
+                        if ((t.tag == "norte" || t.tag == "sur" || t.tag == "oeste")&& GridArr[checkX, checkY] != prevCell)
+                        {
+                            nextCell.GetComponent<Cell>().Position.x = node.este.x;
+                            nextCell.GetComponent<Cell>().Position.z = node.este.z;
+                            nextCell.GetComponent<Renderer>().material.color = Color.black;
+                            neighbours.Add(nextCell);
+                            Debug.Log(t.tag.ToString() + " " + t.name + " " + node.name);
+                        }
+                        else
+                        {
+                            prevCell = GridArr[checkX, checkY];
+                            continue;
+                        }
+                    }
+                }
             }
         }
 
