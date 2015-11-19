@@ -75,7 +75,7 @@ public class Export_Data : MonoBehaviour
                 rowData.Add(rowDataTemp);
             }
         }
-        else if (rowDataTemp.Length < 4)
+        else if (rowDataTemp.Length > 4)
         {
             rowDataTemp = new string[2];
             rowDataTemp[1] = " ";
