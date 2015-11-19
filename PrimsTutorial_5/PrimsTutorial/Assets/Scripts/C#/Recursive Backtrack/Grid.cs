@@ -20,8 +20,8 @@ public class Grid : MonoBehaviour
 
     void Start()
     {
-        RandZ = (int)Random.Range((GridSize.z / 8), GridSize.z);
-        RandX = (int)Random.Range((GridSize.x / 8), GridSize.x);
+        RandZ = (int)Random.Range((GridSize.z / 2), (GridSize.z/2));
+        RandX = (int)Random.Range((GridSize.x / 2), (GridSize.x/2));
         CreateGrid();
         SetStart(0, 0);
         p.enabled = false;
@@ -37,6 +37,7 @@ public class Grid : MonoBehaviour
         {
             for (int iz = 0; iz < z; iz++)
             {
+                //newCell = (Transform)Instantiate(CellPrefab, new Vector3(ix, 0, iz) * Buffer, Quaternion.identity);
                 newCell = (Transform)Instantiate(CellPrefab, new Vector3(ix, 0, iz) * Buffer, Quaternion.identity);
                 newCell.name = string.Format("({0},0,{1})", ix, iz);
                 newCell.parent = transform;
@@ -141,7 +142,7 @@ public class Grid : MonoBehaviour
     public List<Transform> GetNeighbours(Cell node, Cell prevNode)
     {
         List<Transform> neighbours = new List<Transform>();
-        Debug.Log("Estas comparando " + node.name + " mi celda pasada es " + prevNode.name);
+        //Debug.Log("Estas comparando " + node.name + " mi celda pasada es " + prevNode.name);
 
         for (int x = -1; x <= 1; x++)
         {
