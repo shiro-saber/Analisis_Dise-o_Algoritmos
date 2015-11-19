@@ -65,7 +65,7 @@ public class Export_Data : MonoBehaviour
         }
        
 
-        if (mazeTimes.Count != 0 && pathTimes.Count != 0 && rowDataTemp.Length > 5)
+        if (mazeTimes.Count != 0 && pathTimes.Count != 0 && rowDataTemp.Length < 4)
         {
             for (int i = 0; i < mazeTimes.Count; ++i)
             {
@@ -75,7 +75,7 @@ public class Export_Data : MonoBehaviour
                 rowData.Add(rowDataTemp);
             }
         }
-        else if (rowDataTemp.Length > 5)
+        else if (rowDataTemp.Length < 4)
         {
             rowDataTemp = new string[2];
             rowDataTemp[1] = " ";
