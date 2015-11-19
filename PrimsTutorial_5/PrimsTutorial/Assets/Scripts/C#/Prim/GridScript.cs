@@ -10,7 +10,7 @@ public class GridScript : MonoBehaviour {
     public Transform begin;
     public Transform end;
     public Export_Data e;
-    bool acabo;
+    public bool acabo;
     float time;
     // Use this for initialization
     void Start()
@@ -37,7 +37,7 @@ public class GridScript : MonoBehaviour {
 				Grid[x,z] = newCell;
 			}
 		}
-		Camera.main.transform.position = Grid[(int)(Size.x/2f),(int)(Size.z/2f)].position + Vector3.up*20f;
+		Camera.main.transform.position = Grid[(int)(Size.x/2f),(int)(Size.z/2f)].position + Vector3.up*10;
 		Camera.main.orthographicSize = Mathf.Max(Size.x, Size.z);
 	}
 	
@@ -128,7 +128,8 @@ public class GridScript : MonoBehaviour {
             if (empty)
             {
                 time = Time.time;
-                e.primTimes.Add(time);
+                //e.primTimes.Add(time);
+                Export_Data.primTimes.Add(time);
                 Debug.Log("We're Done, "+ time +" seconds taken"); 
 				CancelInvoke("FindNext");
                 end = Set[Set.Count - 1];

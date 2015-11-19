@@ -8,7 +8,7 @@ public class PathScript : MonoBehaviour
     GridScript g;
     Transform begin;
     Transform end;
-    bool pathend;
+    public bool pathend;
     float time;
 	// Use this for initialization
 	void Start ()
@@ -85,7 +85,9 @@ public class PathScript : MonoBehaviour
         }
         path.Reverse();
         time = Time.time;
-        e.primPath.Add(time);
+        //e.primPath.Add(time);
+        Export_Data.primPath.Add(time);
+        //Export_Data.imprimirDatos();
         Debug.Log("Pathfinding done! Took " + time + " seconds");
         pathend = true;
     }

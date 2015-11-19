@@ -73,9 +73,10 @@ public class Grid : MonoBehaviour
             GridArr[RandX, RandZ - 1].name = string.Format("End");
             GridArr[RandX, RandZ - 1].tag = string.Format("END");
             time = Time.time;
-            e.mazeTimes.Add(time);
+            //e.mazeTimes.Add(time);
             Debug.Log("We're done! Took " + time + " seconds for a " + GridSize.x + " by " + GridSize.z + " grid.");
             CancelInvoke("FindNext");
+            Export_Data.mazeTimes.Add(time);
             acabo = true;
             return;
         }

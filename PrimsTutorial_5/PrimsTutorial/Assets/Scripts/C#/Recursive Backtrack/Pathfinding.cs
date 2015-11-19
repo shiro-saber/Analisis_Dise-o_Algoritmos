@@ -8,7 +8,7 @@ public class Pathfinding : MonoBehaviour
     Transform end;
     Transform begin;
     public Export_Data e;
-    bool pathend;
+    public bool pathend;
     public float time;
     Cell prevNode;
     // Use this for initialization
@@ -73,8 +73,9 @@ public class Pathfinding : MonoBehaviour
         }
 		path.Reverse();
         time = Time.time;
-        e.mazeTimes.Add(time);
+        //e.mazeTimes.Add(time);    //al parecer ya no se necesita
         Debug.Log("Pathfinding done! Took " + time + " seconds");
+        Export_Data.pathTimes.Add(time); //esto fue lo que agregó para pasar los datos de la var
         pathend = true;
     }
 

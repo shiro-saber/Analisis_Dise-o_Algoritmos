@@ -8,10 +8,10 @@ using System.Collections.Generic;
 public class Export_Data : MonoBehaviour
 {
     private List<string[]> rowData = new List<string[]>();
-    public List<float> mazeTimes = new List<float>();
-    public List<float> pathTimes = new List<float>();
-    public List<float> primTimes = new List<float>();
-    public List<float> primPath = new List<float>();
+    public static List<float> mazeTimes = new List<float>();
+    public static List<float> pathTimes = new List<float>();
+    public static List<float> primTimes = new List<float>();
+    public static List<float> primPath = new List<float>();
     string[] rowDataTemp = new string[5];
 
     void Start()
@@ -22,6 +22,15 @@ public class Export_Data : MonoBehaviour
         rowDataTemp[3] = "Prim";
         rowDataTemp[4] = "A* Prim";
         rowData.Add(rowDataTemp);
+        DontDestroyOnLoad(transform.gameObject);// si no es con player prefs para poner el valor de la variable 
+        //otra manera de conseguirlo es cambiar
+    }
+
+    //esta sería la función para imprimir los datos en la consola.
+    public static int imprimirDatos()
+    {
+        //debe ser un ciclo y la impresíón de listas en c#
+        return 1;
     }
 
     void update()
@@ -29,16 +38,21 @@ public class Export_Data : MonoBehaviour
         Save();
     }
     // Use this for initialization
+    //la clase, hacerla como public static para todas las escenas
+    //si no sirve usar un done des
     public void Save()
     {
         /* hay que sacar los tiempos */
-        //mazeTimes = g.recursiveTimes;
-        //pathTimes = p.recursivepath;
-        //primTimes = gs.primtime;
-        //primPath = ps.pathprim;
-        /*Ya sacamos los tiempos a exportar*/
+        //public static List<float> pathTimes = new List<float>();
+    //mazeTimes = g.recursiveTimes;
+    //pathTimes = p.recursivepath;
+    //primTimes = gs.primtime;
+    //primPath = ps.pathprim;
+    /*Ya sacamos los tiempos a exportar*/
 
-        int max = Mathf.Max(mazeTimes.Count, pathTimes.Count, primPath.Count, primTimes.Count);
+        //después tendríamos que hacer la clase public static para imprimir donde queramos la condición
+
+    int max = Mathf.Max(mazeTimes.Count, pathTimes.Count, primPath.Count, primTimes.Count);
 
         if (max != 0)
         {
@@ -51,7 +65,7 @@ public class Export_Data : MonoBehaviour
         }
        
 
-        if (mazeTimes.Count != 0 && pathTimes.Count != 0)
+        if (mazeTimes.Count != 0 && pathTimes.Count != 0 && rowDataTemp.Length > 5)
         {
             for (int i = 0; i < mazeTimes.Count; ++i)
             {
@@ -61,8 +75,15 @@ public class Export_Data : MonoBehaviour
                 rowData.Add(rowDataTemp);
             }
         }
+        else if (rowDataTemp.Length > 5)
+        {
+            rowDataTemp = new string[2];
+            rowDataTemp[1] = " ";
+            rowDataTemp[2] = " ";
+            rowData.Add(rowDataTemp);
+        }
 
-        if (primTimes.Count != 0 && primPath.Count != 0)
+        if (primTimes.Count != 0 && primPath.Count != 0 && rowDataTemp.Length > 5)
         {
             for (int j = 0; j < primTimes.Count; ++j)
             {
