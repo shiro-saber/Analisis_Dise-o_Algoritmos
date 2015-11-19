@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PathScript : MonoBehaviour
 {
-    public Export_Data e = new Export_Data();
+    public Export_Data e;
     GridScript g;
     Transform begin;
     Transform end;
@@ -13,7 +13,7 @@ public class PathScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        time = Time.time;
+        time = 0;
         pathend = false;
         g = GetComponent<GridScript>();
         begin = g.begin;
@@ -35,7 +35,7 @@ public class PathScript : MonoBehaviour
 
                 if (openSet[i].GetComponent<CellScript>().fCost < currentNode.GetComponent<CellScript>().fCost || openSet[i].GetComponent<CellScript>().fCost == currentNode.GetComponent<CellScript>().fCost && openSet[i].GetComponent<CellScript>().hCost < currentNode.GetComponent<CellScript>().hCost)
                     currentNode = openSet[i];
-                print("Todo bien despues de agregar el actual al set");
+                //print("Todo bien despues de agregar el actual al set");
             }
 
             openSet.Remove(currentNode);
@@ -43,7 +43,7 @@ public class PathScript : MonoBehaviour
 
             if (currentNode == end)
             {
-                print("LLEGUE AL NODO FINAL");
+                //print("LLEGUE AL NODO FINAL");
                 RetracePath(begin, end);
                 return;
             }
@@ -59,7 +59,7 @@ public class PathScript : MonoBehaviour
                     neighbour.GetComponent<CellScript>().gCost = newMovementCostToNeighbour;
                     neighbour.GetComponent<CellScript>().hCost = GetDistance(neighbour, end);
                     neighbour.parent = currentNode;
-                    print("Pase hasta definir los costos");
+                    //print("Pase hasta definir los costos");
 
                     if (!openSet.Contains(neighbour.GetComponent<Transform>()))
                     {
@@ -84,7 +84,8 @@ public class PathScript : MonoBehaviour
             currentNode.GetComponent<Renderer>().material.color = Color.yellow;
         }
         path.Reverse();
-        e.primTimes.Add(time);
+        time = Time.time;
+        e.primPath.Add(time);
         Debug.Log("Pathfinding done! Took " + time + " seconds");
         pathend = true;
     }

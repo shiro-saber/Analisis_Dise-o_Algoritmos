@@ -13,17 +13,15 @@ public class Grid : MonoBehaviour
     private int RandX;
     private bool acabo = false;
     public float time;
-    public Export_Data e = new Export_Data(); //para exportar (aun se esta trabajando)
+    public Export_Data e; //para exportar (aun se esta trabajando)
     public Pathfinding p;
     public Transform begin; //para el pathfinding
     public Transform end; //para el pathfinding
-    Transform prevCell = null;
-    Transform nextCell = null;
 
     void Start()
     {
-        RandZ = (int)Random.Range((GridSize.z), GridSize.z);
-        RandX = (int)Random.Range((GridSize.x / 2), GridSize.x);
+        RandZ = (int)Random.Range((GridSize.z / 8), GridSize.z);
+        RandX = (int)Random.Range((GridSize.x / 8), GridSize.x);
         CreateGrid();
         SetStart(0, 0);
         p.enabled = false;
@@ -139,50 +137,62 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public List<Transform> GetNeighbours(Cell node)
+    //Se supone aqui estamos quitando todos los vecinos que no se pueden pasar, que al fin y al cabo debería regresar solo uno o dos neighbour pasable 
+    public List<Transform> GetNeighbours(Cell node, Cell prevNode)
     {
         List<Transform> neighbours = new List<Transform>();
+        Debug.Log("Estas comparando " + node.name + " mi celda pasada es " + prevNode.name);
 
         for (int x = -1; x <= 1; x++)
         {
             for (int y = -1; y <= 1; y++)
             {
-                if (x == -1 && y == -1)
+                if (x == -1 && y == -1) //no puede ser -1, -1 para que no sea diagonal
                     continue;
 
-                if (x == 0 && y == 0)
+                if (x == 0 && y == 0) //no puede ser 0, 0 porque el nodo actual no es vecino del nodo actual
                     continue;
 
-                if (x == 1 && y == 1)
+                if (x == 1 && y == 1) // no puede ser 1,1 para que no sea diagonal
                     continue;
 
-                if (x == -1 && y == 1)
+                if (x == -1 && y == 1) //no puede ser -1, 1 para que no sea diagonal
                     continue;
 
-                if (x == 1 && y == -1)
+                if (x == 1 && y == -1) //no puede ser 1, -1 para que no sea diagonal
                     continue;
 
-                int checkX = (int)node.Position.x + x;
-                int checkY = (int)node.Position.z + y;
+                int checkX = (int)node.Position.x + x; //la posicion del nodo ahorita mas x que sera -1,0 o 1 es el siguiente en x
+                int checkY = (int)node.Position.z + y; //la posicion del nodo ahorita mas y que sera 1,-1 o 0 es el siguiente en y
              
-                if (checkX >= 0 && checkX < GridSize.x && checkY >= 0 && checkY < GridSize.z)
+                if (checkX >= 0 && checkX < GridSize.x && checkY >= 0 && checkY < GridSize.z) //para que la siguiente no sea mayor al tamaño del grid o menor a 0,0 que es el inicio
                 {
-                    foreach (Transform t in node.transform)
+                    neighbours.Add(GridArr[checkX, checkY]); //agregamos todos los vecinos posibles
+
+                    foreach (Transform t in GridArr[checkX, checkY].transform)//para todos los hijos del next, para obtener los tags de las paredes
                     {
-                        //nextCell = GridArr[checkX, checkY];
-                        //neighbours.Add(nextCell);
-                        if ((t.tag == "norte" || t.tag == "sur" || t.tag == "oeste")&& GridArr[checkX, checkY] != prevCell)
+                        foreach (Transform g in node.transform) //para todos los hijos del actual, para obtener los tags de las paredes
                         {
-                            nextCell.GetComponent<Cell>().Position.x = node.este.x;
-                            nextCell.GetComponent<Cell>().Position.z = node.este.z;
-                            nextCell.GetComponent<Renderer>().material.color = Color.black;
-                            neighbours.Add(nextCell);
-                            Debug.Log(t.tag.ToString() + " " + t.name + " " + node.name);
-                        }
-                        else
-                        {
-                            prevCell = GridArr[checkX, checkY];
-                            continue;
+                            if (x == 0 && y == 1 && GridArr[checkX, checkY] != prevNode && t.tag == "sur" && g.tag == "norte")  //si el tag del next es sur el del actual es norte no puedes ir arriba
+                            {
+                                neighbours.Remove(GridArr[checkX, checkY]);
+                                //Debug.Log("Removi " + GridArr[checkX, checkY].name + "del set");
+                            }
+                            else if (y == -1 && x == 0 && GridArr[checkX, checkY] != prevNode && t.tag == "norte" && g.tag == "sur") //si el de next es nortye el del actual sur no puedes ir abajo
+                            {
+                                neighbours.Remove(GridArr[checkX, checkY]);
+                                //Debug.Log("Removi " + GridArr[checkX, checkY].name + "del set");
+                            }
+                            else if (y == 0 && x == -1 && GridArr[checkX, checkY] != prevNode && t.tag == "este" && g.tag == "oeste") //si el de next en este el de actual es oeste no puede ir izquierda
+                            {
+                                neighbours.Remove(GridArr[checkX, checkY]);
+                                //Debug.Log("Removi " + GridArr[checkX, checkY].name + "del set");
+                            }
+                            else if (y == 0 && x == 1 && GridArr[checkX, checkY] != prevNode && t.tag == "oeste" && g.tag == "este") //si el de next es oeste y el actual este no puede ir derecha
+                            {
+                                neighbours.Remove(GridArr[checkX, checkY]);
+                                //Debug.Log("Removi " + GridArr[checkX, checkY].name + "del set");
+                            }
                         }
                     }
                 }

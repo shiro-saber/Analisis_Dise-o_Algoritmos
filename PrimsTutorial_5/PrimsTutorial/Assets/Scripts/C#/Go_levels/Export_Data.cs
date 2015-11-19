@@ -5,23 +5,38 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Export_Data{
+public class Export_Data : MonoBehaviour
+{
     private List<string[]> rowData = new List<string[]>();
     public List<float> mazeTimes = new List<float>();
     public List<float> pathTimes = new List<float>();
     public List<float> primTimes = new List<float>();
     public List<float> primPath = new List<float>();
-    
-    // Use this for initialization
-    public void Save()
+    string[] rowDataTemp = new string[5];
+
+    void Start()
     {
-        string[] rowDataTemp = new string[5];
         rowDataTemp[0] = " ";
         rowDataTemp[1] = "Growing Tree";
         rowDataTemp[2] = "A* Growing Tree";
         rowDataTemp[3] = "Prim";
         rowDataTemp[4] = "A* Prim";
         rowData.Add(rowDataTemp);
+    }
+
+    void update()
+    {
+        Save();
+    }
+    // Use this for initialization
+    public void Save()
+    {
+        /* hay que sacar los tiempos */
+        //mazeTimes = g.recursiveTimes;
+        //pathTimes = p.recursivepath;
+        //primTimes = gs.primtime;
+        //primPath = ps.pathprim;
+        /*Ya sacamos los tiempos a exportar*/
 
         int max = Mathf.Max(mazeTimes.Count, pathTimes.Count, primPath.Count, primTimes.Count);
 

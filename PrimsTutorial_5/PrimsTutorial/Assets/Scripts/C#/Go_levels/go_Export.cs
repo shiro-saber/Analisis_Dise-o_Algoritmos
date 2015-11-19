@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class go_Export : MonoBehaviour {
-    public Export_Data e = new Export_Data();
+public class go_Export : MonoBehaviour
+{
+    public Export_Data e;
 	// Use this for initialization
 	void Start ()
     {

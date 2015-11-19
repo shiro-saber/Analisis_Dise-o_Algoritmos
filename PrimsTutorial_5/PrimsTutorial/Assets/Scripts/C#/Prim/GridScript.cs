@@ -9,7 +9,7 @@ public class GridScript : MonoBehaviour {
     public PathScript p;
     public Transform begin;
     public Transform end;
-    public Export_Data e = new Export_Data();
+    public Export_Data e;
     bool acabo;
     float time;
     // Use this for initialization
@@ -17,7 +17,6 @@ public class GridScript : MonoBehaviour {
     {
         p.enabled = false;
         acabo = false;
-        time = Time.time;
         CreateGrid();
 		SetRandomNumbers();
 		SetAdjacents();
@@ -128,6 +127,7 @@ public class GridScript : MonoBehaviour {
 
             if (empty)
             {
+                time = Time.time;
                 e.primTimes.Add(time);
                 Debug.Log("We're Done, "+ time +" seconds taken"); 
 				CancelInvoke("FindNext");
@@ -167,14 +167,22 @@ public class GridScript : MonoBehaviour {
         {
             for (int y = -1; y <= 1; y++)
             {
-                if (x == 0 && y == 0)
+                if (x == -1 && y == -1) //no puede ser -1, -1 para que no sea diagonal
                     continue;
-                else if (x == -1 && y == -1)
+
+                if (x == 0 && y == 0) //no puede ser 0, 0 porque el nodo actual no es vecino del nodo actual
                     continue;
-                else if (x == 1 && y == 1)
+
+                if (x == 1 && y == 1) // no puede ser 1,1 para que no sea diagonal
                     continue;
-                
-                 int checkX = (int)node.Position.x + x;
+
+                if (x == -1 && y == 1) //no puede ser -1, 1 para que no sea diagonal
+                    continue;
+
+                if (x == 1 && y == -1) //no puede ser 1, -1 para que no sea diagonal
+                    continue;
+
+                int checkX = (int)node.Position.x + x;
                  int checkY = (int)node.Position.z + y;
 
                  if (checkX >= 0 && checkX < Size.x && checkY >= 0 && checkY < Size.z)
