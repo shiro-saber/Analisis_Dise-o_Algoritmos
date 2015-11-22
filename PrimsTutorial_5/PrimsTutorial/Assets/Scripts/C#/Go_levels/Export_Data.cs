@@ -37,60 +37,60 @@ public class Export_Data : MonoBehaviour
     {
         Save();
     }
+
     // Use this for initialization
     //la clase, hacerla como public static para todas las escenas
     //si no sirve usar un done des
     public void Save()
     {
-        /* hay que sacar los tiempos */
-        //public static List<float> pathTimes = new List<float>();
-    //mazeTimes = g.recursiveTimes;
-    //pathTimes = p.recursivepath;
-    //primTimes = gs.primtime;
-    //primPath = ps.pathprim;
-    /*Ya sacamos los tiempos a exportar*/
-
-        //después tendríamos que hacer la clase public static para imprimir donde queramos la condición
-
-    int max = Mathf.Max(mazeTimes.Count, pathTimes.Count, primPath.Count, primTimes.Count);
+        int max = Mathf.Max(mazeTimes.Count, pathTimes.Count, primPath.Count, primTimes.Count);
 
         if (max != 0)
         {
             for (int m = 0; m < max; ++m)
             {
                 rowDataTemp = new string[1];
-                rowDataTemp[0] = "Tiempo " + m;
+                rowDataTemp[0] = "Tiempo " + m + 1;
                 rowData.Add(rowDataTemp);
             }
-        }
-       
-
-        if (mazeTimes.Count != 0 && pathTimes.Count != 0 && rowDataTemp.Length < 4)
-        {
-            for (int i = 0; i < mazeTimes.Count; ++i)
+            if (mazeTimes.Count != 0 && pathTimes.Count != 0)
             {
-                rowDataTemp = new string[2];
-                rowDataTemp[1] = mazeTimes[i].ToString();
-                rowDataTemp[2] = pathTimes[i].ToString();
-                rowData.Add(rowDataTemp);
+                for (int i = 0; i < mazeTimes.Count; ++i)
+                {
+                    if (primTimes.Count != 0 && primPath.Count != 0)
+                    {
+                        for (int j = 0; j < primTimes.Count; ++j)
+                        {
+                            rowDataTemp = new string[5];
+                            rowDataTemp[1] = mazeTimes[i].ToString();
+                            rowDataTemp[2] = pathTimes[i].ToString();
+                            rowDataTemp[3] = primTimes[j].ToString();
+                            rowDataTemp[4] = primPath[j].ToString();
+                            rowData.Add(rowDataTemp);
+                        }
+                    }
+                    else
+                    {
+                        rowDataTemp = new string[5];
+                        rowDataTemp[1] = mazeTimes[i].ToString();
+                        rowDataTemp[2] = pathTimes[i].ToString();
+                        rowDataTemp[3] = " ";
+                        rowDataTemp[4] = " ";
+                        rowData.Add(rowDataTemp);
+                    }
+                }
             }
-        }
-        else if (rowDataTemp.Length > 4)
-        {
-            rowDataTemp = new string[2];
-            rowDataTemp[1] = " ";
-            rowDataTemp[2] = " ";
-            rowData.Add(rowDataTemp);
-        }
-
-        if (primTimes.Count != 0 && primPath.Count != 0 && rowDataTemp.Length > 5)
-        {
-            for (int j = 0; j < primTimes.Count; ++j)
+            else if (primTimes.Count != 0 && primPath.Count != 0)
             {
-                rowDataTemp = new string[2];
-                rowDataTemp[3] = primTimes[j].ToString();
-                rowDataTemp[4] = primPath[j].ToString();
-                rowData.Add(rowDataTemp);
+                for (int j = 0; j < primTimes.Count; ++j)
+                {
+                    rowDataTemp = new string[5];
+                    rowDataTemp[1] = " ";
+                    rowDataTemp[2] = " ";
+                    rowDataTemp[3] = primTimes[j].ToString();
+                    rowDataTemp[4] = primPath[j].ToString();
+                    rowData.Add(rowDataTemp);
+                }
             }
         }
 
@@ -108,7 +108,7 @@ public class Export_Data : MonoBehaviour
             sb.AppendLine(string.Join(delimiter, output[l]));
 
         string filePath = getPath();
-        
+
         StreamWriter outStream = System.IO.File.CreateText(filePath);
         outStream.WriteLine(sb);
         outStream.Close();
@@ -116,14 +116,14 @@ public class Export_Data : MonoBehaviour
 
     private string getPath()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         return Application.dataPath + "/CSV" + "Tiempos.csv";
-        #elif UNITY_ANDROID
+#elif UNITY_ANDROID
         return Application.persistentDataPath + "Tiempos.csv";
-        #elif UNITY_IPHONE
+#elif UNITY_IPHONE
         return Application.persistentDataPath + "/" + "Tiempos.csv";
-        #else
+#else
         return Application.dataPath + "/" + "Tiempos.csv";
-        #endif
+#endif
     }
 }
